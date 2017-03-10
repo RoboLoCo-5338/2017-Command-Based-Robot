@@ -1,13 +1,11 @@
 package org.usfirst.frc.team5338.robot.subsystems;
 
 import org.usfirst.frc.team5338.robot.OI;
-import org.usfirst.frc.team5338.robot.Robot;
 import org.usfirst.frc.team5338.robot.OI.DriveState;
 import org.usfirst.frc.team5338.robot.commands.TankDriveWithJoysticks;
 
 import com.ctre.CANTalon;
 
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

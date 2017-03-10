@@ -7,7 +7,6 @@ import org.usfirst.frc.team5338.robot.subsystems.GearHandler;
 import org.usfirst.frc.team5338.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
