@@ -7,7 +7,6 @@ import org.usfirst.frc.team5338.robot.subsystems.GearHandler;
 import org.usfirst.frc.team5338.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -30,9 +29,6 @@ public class Robot extends IterativeRobot
 	public static final BallHandler ballhandler = new BallHandler();
 	public static final Winch winch = new Winch();
 	public static final GearHandler gearhandler = new GearHandler();
-
-	private static final Relay jetsonPower = new Relay(0);
-	public static final Relay jetsonReset = new Relay(1);
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -61,11 +57,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
-		autonomousCommand.cancel();
-		// Jetson power spark on enable
-		jetsonPower.set(Relay.Value.kOn);
-		Timer.delay(0.5);
-		jetsonPower.set(Relay.Value.kOff);		
+		autonomousCommand.cancel();	
 	}
 
 	@Override

@@ -53,12 +53,12 @@ public class Main
 
     // This creates a CvSource to use. This will take in a Mat image that has had OpenCV operations
     // operations
-    CvSource imageSource = new CvSource("CV Image Source", VideoMode.PixelFormat.kMJPEG, IMG_WIDTH, IMG_HEIGHT, 30);
-    MjpegServer cvstream = new MjpegServer("CV Image Stream", 1186);
+    CvSource imageSource = new CvSource("Raw Image Source", VideoMode.PixelFormat.kMJPEG, IMG_WIDTH, IMG_HEIGHT, 30);
+    MjpegServer cvstream = new MjpegServer("Raw Camera Stream", 1186);
     cvStream.setSource(imageSource);
     
-    CvSource imageSource2 = new CvSource("CV Image Source 2", VideoMode.PixelFormat.kMJPEG, IMG_WIDTH, IMG_HEIGHT, 30);
-    MjpegServer cvStream2 = new MjpegServer("CV Image Stream 2", 1187);
+    CvSource imageSource2 = new CvSource("Processed Image Source", VideoMode.PixelFormat.kMJPEG, IMG_WIDTH, IMG_HEIGHT, 30);
+    MjpegServer cvStream2 = new MjpegServer("Processed Camera Stream", 1187);
     cvStream2.setSource(imageSource2);
 
     // All Mats and Lists should be stored outside the loop to avoid allocations
@@ -90,7 +90,15 @@ public class Main
 		{
 				rects.add(Imgproc.boundingRect(mop));
 		}
-		
+		int centerX = 0;
+		int centerY = 0;
+		for(Rect r: rects)
+		{
+			centerX += r.x;
+			centerY += r.y;
+		}
+		centerX /= rects.size();
+		centerY /= rects.size();
 		//remove rectangles that aren't the right size
 		/*for(int i=0;i<rects.size();i++)
 		{
@@ -101,7 +109,7 @@ public class Main
 				i--;
 			}
 		}*/
-
+		/*
 		if (!rects.isEmpty())
 		{
 				//if(rects.size()==2) {
@@ -109,7 +117,7 @@ public class Main
 					Rect r2 = rects.get(1);
 
 					//observed = new Snapshot(time, (r1.x+r2.x+r1.width+r2.width)/2-IMG_WIDTH/2, (r1.y+r2.y+r1.height+r2.height)/2, Math.abs(r1.x-r2.x));
-				/*} else if (time - oldTime < 200) {
+				} else if (time - oldTime < 200) {
 					//use lastObserved to help determine the new position
 					//TODO 1 or >3 rectangles
 					//observed = new Snapshot(0,0,0,0);
@@ -169,11 +177,11 @@ public class Main
 							side = 1;
 						}
 					}
-					//observed = new Snapshot(0,0,0,0);*/
+					//observed = new Snapshot(0,0,0,0);
 					table.putNumber("r1x", r1.x);
 					table.putNumber("r2x", r2.x);
 					table.putNumber("r1y", r1.y);
-					table.putNumber("r2y", r2.y);		
+					table.putNumber("r2y", r2.y);	*/	
 		} 
 		/*else {
 			if (time - oldTime < 500) {
@@ -183,13 +191,6 @@ public class Main
 				*/
     
     }
-
-      // Below is where you would do your OpenCV operations on the provided image
-      // The sample below just changes color source to HSV
-
-      // Here is where you would write a processed image that you want to restreams
-      // This will most likely be a marked up image of what the camera sees
-      // For now, we are just going to stream the HSV image
   }
 
 

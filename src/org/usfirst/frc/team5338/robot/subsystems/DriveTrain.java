@@ -50,15 +50,6 @@ public class DriveTrain extends Subsystem
     		oi.driveState = DriveState.FORWARD;
     	}
 		
-		if(oi.get(OI.Button.JETSON_RESET))
-		{
-			Robot.jetsonReset.set(Relay.Value.kOn);
-		}
-		else
-		{
-			Robot.jetsonReset.set(Relay.Value.kOff);
-		}
-		
 		if(oi.get(OI.Button.SLOW))
 		{
 			throttle = 0.5;

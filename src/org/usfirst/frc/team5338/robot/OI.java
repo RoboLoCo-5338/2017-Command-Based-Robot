@@ -14,7 +14,7 @@ public class OI
 	{
 		OFF, LOWER_INTAKE, UPPER_INTAKE, OUTTAKE,
 		SLOW, STRAIGHT, REVERSE, FORWARD,
-		GEAR_OPEN, GEAR_CLOSE, WINCH, JETSON_RESET
+		GEAR_OPEN, GEAR_CLOSE, WINCH
 	}
 	public enum BallState
 	{
@@ -56,7 +56,6 @@ public class OI
 		case GEAR_OPEN: 	return joyL.getRawButton(5);
 		case GEAR_CLOSE: 	return joyL.getRawButton(6);
 		case WINCH: 		return joyL.getRawButton(7) && joyR.getRawButton(7);
-		case JETSON_RESET:	return joyL.getRawButton(3) && joyL.getRawButton(4);
 		
 		default: 			return false;
 		}
