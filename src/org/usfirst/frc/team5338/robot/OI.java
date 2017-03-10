@@ -43,21 +43,33 @@ public class OI
 	{
 		switch(button)
 		{
-		case OFF: 			return joyR.getRawButton(3);
-		case LOWER_INTAKE: 	return joyR.getRawButton(5);
-		case UPPER_INTAKE: 	return joyR.getRawButton(6);
-		case OUTTAKE: 		return joyR.getRawButton(4);
+		case OFF: 			
+			return joyR.getRawButton(3);
+		case LOWER_INTAKE:
+			return joyR.getRawButton(6);
+		case UPPER_INTAKE: 
+			return joyR.getRawButton(4);
+		case OUTTAKE: 	
+			return joyR.getRawButton(5);
 		
-		case SLOW: 			return joyL.getRawButton(1);
-		case STRAIGHT:		return joyR.getRawButton(1);
-		case REVERSE: 		return joyL.getRawButton(2);
-		case FORWARD: 		return joyR.getRawButton(2);
+		case SLOW: 		
+			return joyL.getRawButton(1);
+		case STRAIGHT:	
+			return joyR.getRawButton(1);
+		case REVERSE: 	
+			return joyL.getRawButton(2);
+		case FORWARD: 	
+			return joyR.getRawButton(2);
 		
-		case GEAR_OPEN: 	return joyL.getRawButton(5);
-		case GEAR_CLOSE: 	return joyL.getRawButton(6);
-		case WINCH: 		return joyL.getRawButton(7) && joyR.getRawButton(7);
+		case GEAR_OPEN: 
+			return joyL.getRawButton(3);
+		case GEAR_CLOSE: 
+			return joyL.getRawButton(6);
+		case WINCH: 	
+			return joyL.getRawButton(4) && joyR.getRawButton(6);
 		
-		default: 			return false;
+		default: 			
+			return false;
 		}
 	}
 	private double joystickDeadZone(double value)
