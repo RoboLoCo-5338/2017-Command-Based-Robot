@@ -49,7 +49,6 @@ public class OI
 			return joyR.getRawButton(4);
 		case OUTTAKE: 	
 			return joyR.getRawButton(5);
-		
 		case SLOW: 		
 			return joyL.getRawButton(1);
 		case STRAIGHT:	
@@ -58,7 +57,6 @@ public class OI
 			return joyL.getRawButton(2);
 		case FORWARD: 	
 			return joyR.getRawButton(2);
-		
 		case GEAR_OPEN: 
 			return joyL.getRawButton(3);
 		case GEAR_CLOSE: 
