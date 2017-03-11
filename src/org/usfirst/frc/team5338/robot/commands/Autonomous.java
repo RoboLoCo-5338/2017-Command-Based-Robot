@@ -1,62 +1,40 @@
-
 package org.usfirst.frc.team5338.robot.commands;
-
-import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Autonomous extends CommandGroup
 {
-	//Base line is 7ft and 9(1/4)in from alliance wall
-	String placement = (SmartDashboard.getString("Placement =", ""));
+	private static final String placement = (SmartDashboard.getString("Placement =", ""));
 		
-	double fdist = 0;
-	double bdist = 0;
-	double theta = 0;
-	double fdist2 = 0;
+	private int fdist = 0;
+	private int bdist = 0;
+	private int theta = 0;
+	private int fdist2 = 0;
 	public Autonomous()
 	{
-		//TODO
-		//Maybe implement a switch to allow multiple placements of robot
-		/*switch(placement)
+		switch(placement)
 		{
 			case "left":
 				addSequential(new Move(fdist));
 				addSequential(new Move(bdist));
 				addSequential(new Turn(theta));
 				addSequential(new Move(fdist2));
-				addSequential(new Gear());
+				addSequential(new DepositGear());
 				break;
 			case "center":
-				addSequential(new MoveF(fdist));
-				addSequential(new Gear());
-				addSequential(new MoveB(bdist));
-				addSequential(new TurnL(theta));
-				addSequential(new MoveF(fdist2));
-				addSequential(new TurnR(theta));
-				addSequential(new MoveF(fdist2));
+				addSequential(new Move(fdist));
+				addSequential(new DepositGear());
 				break;
 			case "right":
-				addSequential(new MoveF(fdist));
-				addSequential(new MoveB(bdist));
-				addSequential(new TurnR(theta));
-				addSequential(new MoveF(fdist2));
-				addSequential(new Gear());
+				addSequential(new Move(fdist));
+				addSequential(new Move(bdist));
+				addSequential(new Turn(theta));
+				addSequential(new Move(fdist2));
+				addSequential(new DepositGear());
 				break;
 			default:
 				break;
-		}*/
+		}
 	}
-	    public void changeTalonModeToPosition(CANTalon talon)
-	    {
-	    	talon.changeControlMode(TalonControlMode.Position);
-	    	//TODO
-	    }
-	    public void changeTalonModeToVoltage(CANTalon talon)
-	    {
-	    	talon.changeControlMode(TalonControlMode.PercentVbus);
-	    	//TODO
-	    }
-	}
+}
