@@ -2,6 +2,7 @@ package org.usfirst.frc.team5338.robot.commands;
 
 import org.usfirst.frc.team5338.robot.Robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HandleGears extends Command
@@ -20,6 +21,6 @@ public class HandleGears extends Command
     }
     protected void end()
     {
-    	Robot.gearhandler.stopGears();
+    	Robot.gearhandler.setGears(DoubleSolenoid.Value.kOff);
     }
 }

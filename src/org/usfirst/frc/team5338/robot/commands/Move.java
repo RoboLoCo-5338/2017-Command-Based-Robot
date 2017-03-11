@@ -6,21 +6,23 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Move extends Command 
 {
-    public Move()
+	int time;
+    public Move(int distance)
     {
+    	time = distance;
 		requires(Robot.drivetrain);
+		setTimeout(time);
 	}
-    // Called repeatedly when this Command is scheduled to run
     protected void execute()
     {
+    	Robot.drivetrain.drive(0.50, 0.50);
     }
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished()
     {
-        return true;
+    	return isTimedOut();
     }
-    // Called once after isFinished returns true
     protected void end()
     {
+    	Robot.drivetrain.drive(0.0, 0.0);
     }
 }

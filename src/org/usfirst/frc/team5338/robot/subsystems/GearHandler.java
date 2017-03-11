@@ -31,7 +31,7 @@ public class GearHandler extends Subsystem
 		else
 			DOOR.set(DoubleSolenoid.Value.kOff);
 	}
-    public void stopGears(){
-		DOOR.set(DoubleSolenoid.Value.kOff);
+    public void setGears(DoubleSolenoid.Value setting){
+		DOOR.set(setting);
     }
 }
