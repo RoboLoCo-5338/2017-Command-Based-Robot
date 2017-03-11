@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team5338.robot.commands;
 
 import com.ctre.CANTalon;
@@ -6,9 +7,6 @@ import com.ctre.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The main autonomous command to pickup and deliver the soda to the box.
- */
 public class Autonomous extends CommandGroup
 {
 	//Base line is 7ft and 9(1/4)in from alliance wall

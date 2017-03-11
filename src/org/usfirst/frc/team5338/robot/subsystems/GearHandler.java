@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearHandler extends Subsystem
 {
-
 	private final Compressor COMPRESSOR = new Compressor();
 	private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
 
@@ -19,7 +18,6 @@ public class GearHandler extends Subsystem
 		COMPRESSOR.setClosedLoopControl(true);
 		COMPRESSOR.start(); 
 	}
-
     public void initDefaultCommand()
     {
     	setDefaultCommand(new HandleGears());
@@ -33,7 +31,6 @@ public class GearHandler extends Subsystem
 		else
 			DOOR.set(DoubleSolenoid.Value.kOff);
 	}
-    
     public void stopGears(){
 		DOOR.set(DoubleSolenoid.Value.kOff);
     }

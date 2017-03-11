@@ -6,10 +6,8 @@ public class OI
 {
 	private final Joystick joyL = new Joystick(0);
 	private final Joystick joyR = new Joystick(1);
-	
 	public BallState ballState; 
-	public DriveState driveState;
-	
+	public DriveState driveState;	
 	public enum Button
 	{
 		OFF, LOWER_INTAKE, UPPER_INTAKE, OUTTAKE,
@@ -88,7 +86,6 @@ public class OI
 	{
 		return joystickDeadZone(joyL.getRawAxis(1));
 	}
-	
 	public double getRight()
 	{
 		return joystickDeadZone(joyR.getRawAxis(1));

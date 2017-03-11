@@ -9,10 +9,6 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * The DriveTrain subsystem incorporates the sensors and actuators attached to
- * the robots chassis. These include four drive motors.
- */
 public class DriveTrain extends Subsystem
 {
 	public final CANTalon DRIVEL1 = new CANTalon(4);
@@ -28,10 +24,6 @@ public class DriveTrain extends Subsystem
 	{
 		super();
 	}
-	/**
-	 * When no other command is running let the operator drive around using the
-	 * twin joysticks.
-	 */
 	@Override
 	public void initDefaultCommand()
 	{
@@ -62,7 +54,7 @@ public class DriveTrain extends Subsystem
 		case FORWARD:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
-				drive(oi.getRight(), oi.getRight());
+				DRIVE.tankDrive(oi.getRight(), oi.getRight(), false);
 			}
 			else
 			{
@@ -71,11 +63,11 @@ public class DriveTrain extends Subsystem
 		case REVERSE:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
-				drive(-oi.getRight(), -oi.getRight());
+				DRIVE.tankDrive(-oi.getRight(), -oi.getRight(), false);
 			}
 			else
 			{
-		    DRIVE.tankDrive(throttle * oi.getLeft(), throttle * oi.getRight(), false);
+				DRIVE.tankDrive(throttle * oi.getLeft(), throttle * oi.getRight(), false);
 			}	
     	default:
     		drive(0.0, 0.0);

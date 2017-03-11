@@ -20,8 +20,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends IterativeRobot
 {
 	Command autonomousCommand;
-//	private static final int IMG_WIDTH = 1280;
-//	private static final int IMG_HEIGHT = 720;
 	
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
@@ -29,36 +27,26 @@ public class Robot extends IterativeRobot
 	public static final Winch winch = new Winch();
 	public static final GearHandler gearhandler = new GearHandler();
 	
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 	@Override
 	public void robotInit()
 	{
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new Autonomous();
-	}
-	
+	}	
 	@Override
 	public void autonomousInit() {
 		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
-	
-	/**
-	 * This function is called periodically during autonomous
-	 */
 	@Override
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic()
+	{
 		Scheduler.getInstance().run();
-	}
-	
+	}	
 	@Override
 	public void teleopInit()
 	{
 		autonomousCommand.cancel();	
 	}
-
 	@Override
 	public void teleopPeriodic()
 	{
