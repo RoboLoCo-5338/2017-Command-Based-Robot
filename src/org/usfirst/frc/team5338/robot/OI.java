@@ -12,7 +12,7 @@ public class OI
 	{
 		OFF, LOWER_INTAKE, UPPER_INTAKE, OUTTAKE,
 		SLOW, STRAIGHT, REVERSE, FORWARD,
-		GEAR_OPEN, GEAR_CLOSE, WINCH
+		GEAR, WINCH
 	}
 	public enum BallState
 	{
@@ -48,8 +48,7 @@ public class OI
 		case UPPER_INTAKE: 
 			return joyR.getRawButton(4);
 		case OUTTAKE: 	
-			return joyR.getRawButton(5);
-			
+			return joyR.getRawButton(5);		
 		case SLOW: 		
 			return joyL.getRawButton(1);
 		case STRAIGHT:	
@@ -57,14 +56,11 @@ public class OI
 		case REVERSE: 	
 			return joyL.getRawButton(2);
 		case FORWARD: 	
-			return joyR.getRawButton(2);
-			
-		case GEAR_OPEN: 
+			return joyR.getRawButton(2);			
+		case GEAR: 
 			return joyL.getRawButton(3);
-		case GEAR_CLOSE: 
-			return joyL.getRawButton(5);
 		case WINCH: 	
-			return joyL.getRawButton(4) && joyL.getRawButton(6);
+			return joyL.getRawButton(4);
 		
 		default: 			
 			return false;
@@ -72,13 +68,13 @@ public class OI
 	}
 	private double joystickDeadZone(double value)
 	{
-		if (value > 0.04 || value < -0.04)
+		if (value > 0.08 || value < -0.08)
 		{
-		 return (value - 0.04)/0.96;
+		 return (value - 0.08)/0.92;
 		}
-		else if (value < -0.04)
+		else if (value < -0.08)
 		{
-		 return (value + 0.04)/0.96;
+		 return (value + 0.08)/0.92;
 		}
 		return 0.0;
 	}	

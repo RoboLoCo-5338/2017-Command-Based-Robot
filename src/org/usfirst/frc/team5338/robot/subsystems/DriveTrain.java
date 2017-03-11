@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem
     	}
 		
 		if(oi.get(OI.Button.SLOW))
-		{
+		{	
 			throttle = 0.5;
 		}
 		else
@@ -51,30 +51,33 @@ public class DriveTrain extends Subsystem
 		
 		switch(oi.driveState)
     	{
-		case FORWARD:
+		case REVERSE:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
 				DRIVE.tankDrive(oi.getRight(), oi.getRight(), false);
 			}
 			else
 			{
-				DRIVE.tankDrive(-throttle * oi.getLeft(), -throttle * oi.getRight(), false);
+				DRIVE.tankDrive(throttle * oi.getRight(), throttle * oi.getLeft(), false);
 			}
-		case REVERSE:
+			break;
+		case FORWARD:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
 				DRIVE.tankDrive(-oi.getRight(), -oi.getRight(), false);
 			}
 			else
 			{
-				DRIVE.tankDrive(throttle * oi.getLeft(), throttle * oi.getRight(), false);
-			}	
+				DRIVE.tankDrive(-throttle * oi.getLeft(), -throttle * oi.getRight(), false);
+			}
+			break;
     	default:
     		drive(0.0, 0.0);
+    		break;
     	}
 	}
 	public void drive(double left, double right)
 	{
-		DRIVE.tankDrive(throttle * -left, -throttle * right, false);
+		DRIVE.tankDrive(throttle * left, throttle * right, false);
 	}
 }

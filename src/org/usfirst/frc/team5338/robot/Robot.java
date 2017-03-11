@@ -1,5 +1,4 @@
 package org.usfirst.frc.team5338.robot;
-
 import org.usfirst.frc.team5338.robot.commands.Autonomous;
 import org.usfirst.frc.team5338.robot.subsystems.BallHandler;
 import org.usfirst.frc.team5338.robot.subsystems.DriveTrain;
@@ -20,7 +19,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends IterativeRobot
 {
 	Command autonomousCommand;
-	
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
 	public static final BallHandler ballhandler = new BallHandler();
@@ -30,7 +28,6 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		// instantiate the command used for the autonomous period
 		autonomousCommand = new Autonomous();
 	}	
 	@Override

@@ -11,11 +11,18 @@ public class Move extends Command
     {
     	time = distance;
 		requires(Robot.drivetrain);
-		setTimeout(time);
+		setTimeout(Math.abs(time));
 	}
     protected void execute()
     {
-    	Robot.drivetrain.drive(0.50, 0.50);
+    	if(time > 0)
+    	{
+    		Robot.drivetrain.drive(-0.25, -0.25);
+    	}
+    	else
+    	{
+    		Robot.drivetrain.drive(0.25, 0.25);
+    	}
     }
     protected boolean isFinished()
     {
