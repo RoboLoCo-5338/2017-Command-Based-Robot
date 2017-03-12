@@ -5,6 +5,8 @@ import org.usfirst.frc.team5338.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5338.robot.subsystems.GearHandler;
 import org.usfirst.frc.team5338.robot.subsystems.Winch;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,6 +31,11 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		autonomousCommand = new Autonomous();
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(320, 240);
+		camera.setFPS(60);
+		camera.setExposureAuto();
+		camera.setWhiteBalanceAuto();
 	}	
 	@Override
 	public void autonomousInit() {

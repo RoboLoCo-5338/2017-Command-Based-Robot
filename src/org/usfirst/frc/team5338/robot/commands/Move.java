@@ -6,16 +6,16 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Move extends Command 
 {
-	int time;
-    public Move(int distance)
+	int seconds;
+    public Move(int input)
     {
-    	time = distance;
+    	seconds = input;
 		requires(Robot.drivetrain);
-		setTimeout(Math.abs(time));
+		setTimeout(Math.abs(seconds));
 	}
     protected void execute()
     {
-    	if(time > 0)
+    	if(seconds > 0)
     	{
     		Robot.drivetrain.drive(-0.25, -0.25);
     	}

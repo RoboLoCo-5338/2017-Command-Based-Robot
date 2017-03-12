@@ -6,22 +6,29 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Turn extends Command
 {
-	int time;
+	int degrees;
     public Turn(int angle)
     {
-    	time = angle;
+    	degrees = angle;
 		requires(Robot.drivetrain);
-		setTimeout(Math.abs(time));
+		setTimeout((int)(Math.ceil(Math.abs(degrees / 72.5))));
     }
     protected void execute()
     {
-    	if(time > 0)
+    	if(timeSinceInitialized() <= Math.abs(degrees / 72.5))
     	{
-    		Robot.drivetrain.drive(0.50, -0.50);
+    		if(degrees > 0)
+    		{
+    			Robot.drivetrain.drive(0.25, -0.25);
+    		}
+    		else
+    		{
+    			Robot.drivetrain.drive(-0.25, 0.25);
+    		}
     	}
     	else
     	{
-    		Robot.drivetrain.drive(-0.50, 0.50);
+    		Robot.drivetrain.drive(0,0);
     	}
     }
     protected boolean isFinished()
