@@ -1,2 +1,2 @@
 # Command-Based-Robot2
-fresh project after an evil bug, I blame Andrew Thomas for this :)
+This code is the code we used for competitions at Week 2 and Week 3 Competitions.
