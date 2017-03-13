@@ -11,12 +11,12 @@ public class DepositGear extends Command
 	{
 		requires(Robot.drivetrain);
 		requires(Robot.gearhandler);
-		setTimeout(4);
+		setTimeout(2);
 	}
 	protected void execute()
 	{
 		Robot.gearhandler.setGears(DoubleSolenoid.Value.kReverse);
-		if(timeSinceInitialized() >= 2.0)
+		if(timeSinceInitialized() >= 0.75)
 		Robot.drivetrain.drive(0.25, 0.25);
 	}
 	protected boolean isFinished()
@@ -26,5 +26,6 @@ public class DepositGear extends Command
 	protected void end()
 	{
 		Robot.drivetrain.drive(0.0, 0.0);
+		Robot.gearhandler.setGears(DoubleSolenoid.Value.kForward);	
 	}
 }

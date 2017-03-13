@@ -54,7 +54,7 @@ public class DriveTrain extends Subsystem
 		case REVERSE:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
-				DRIVE.tankDrive(oi.getRight(), oi.getRight(), false);
+				DRIVE.tankDrive(oi.getLeft(), oi.getLeft(), false);
 			}
 			else
 			{
@@ -64,7 +64,7 @@ public class DriveTrain extends Subsystem
 		case FORWARD:
 			if(oi.get(OI.Button.STRAIGHT))
 			{
-				DRIVE.tankDrive(-oi.getRight(), -oi.getRight(), false);
+				DRIVE.tankDrive(-oi.getLeft(), -oi.getLeft(), false);
 			}
 			else
 			{

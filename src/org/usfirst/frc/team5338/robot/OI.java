@@ -26,7 +26,7 @@ public class OI
 	public OI()
 	{
 		ballState = BallState.OFF;
-		driveState = DriveState.FORWARD;
+		driveState = DriveState.REVERSE;
 	}	
 	public Joystick getJoystick(int n)
 	{
@@ -42,39 +42,38 @@ public class OI
 		switch(button)
 		{
 		case OFF: 			
-			return joyR.getRawButton(3);
+			return joyR.getRawButton(5);
 		case LOWER_INTAKE:
-			return joyR.getRawButton(6);
-		case UPPER_INTAKE: 
 			return joyR.getRawButton(4);
+		case UPPER_INTAKE: 
+			return joyR.getRawButton(6);
 		case OUTTAKE: 	
-			return joyR.getRawButton(5);		
+			return joyR.getRawButton(3);		
 		case SLOW: 		
-			return joyL.getRawButton(1);
-		case STRAIGHT:	
 			return joyR.getRawButton(1);
+		case STRAIGHT:	
+			return joyL.getRawButton(1);
 		case REVERSE: 	
 			return joyL.getRawButton(2);
 		case FORWARD: 	
 			return joyR.getRawButton(2);			
 		case GEAR: 
-			return joyL.getRawButton(3);
+			return joyL.getRawButton(5);
 		case WINCH: 	
-			return joyL.getRawButton(4);
-		
+			return joyL.getRawButton(6);
 		default: 			
 			return false;
 		}
 	}
 	private double joystickDeadZone(double value)
 	{
-		if (value > 0.08 || value < -0.08)
+		if (value > 0.04 || value < -0.04)
 		{
-		 return (value - 0.08)/0.92;
+		 return (value - 0.04)/0.96;
 		}
-		else if (value < -0.08)
+		else if (value < -0.04)
 		{
-		 return (value + 0.08)/0.92;
+		 return (value + 0.04)/0.96;
 		}
 		return 0.0;
 	}	

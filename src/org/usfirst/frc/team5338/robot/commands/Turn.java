@@ -9,7 +9,7 @@ public class Turn extends Command
 	int degrees;
     public Turn(int angle)
     {
-    	degrees = angle;
+    	degrees = angle*12/13;
 		requires(Robot.drivetrain);
 		setTimeout((int)(Math.ceil(Math.abs(degrees / 72.5))));
     }

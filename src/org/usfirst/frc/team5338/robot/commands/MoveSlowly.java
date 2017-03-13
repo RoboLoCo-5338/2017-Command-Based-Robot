@@ -4,10 +4,10 @@ import org.usfirst.frc.team5338.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Move extends Command 
+public class MoveSlowly extends Command 
 {
 	int seconds;
-    public Move(int input)
+    public MoveSlowly(int input)
     {
     	seconds = input;
 		requires(Robot.drivetrain);
