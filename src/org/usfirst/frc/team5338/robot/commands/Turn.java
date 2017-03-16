@@ -39,9 +39,10 @@ public class Turn extends Command
     	// 	Robot.drivetrain.drive(0,0);
     	// }
     }
-    protected boolean isFinished(int angle, int tolerance)
+    protected boolean isFinished()
     {
-    	return Abs(Robot.ahrs.getAngle() - angle) < tolerance;
+    	return Abs(Robot.ahrs.getAngle() - Robot.ahrs.getSetpoint()) < 2.0;
+			//2.0 is the tolerance in degrees
     }
     protected void end()
     {
