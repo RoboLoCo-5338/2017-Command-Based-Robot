@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
+public class Robot extends IterativeRobot implements PIDOutput
 {
 	Command autonomousCommand;
 	public static final OI oi = new OI();
@@ -26,7 +28,21 @@ public class Robot extends IterativeRobot
 	public static final BallHandler ballhandler = new BallHandler();
 	public static final Winch winch = new Winch();
 	public static final GearHandler gearhandler = new GearHandler();
-	
+
+
+	public static AHRS ahrs;
+	public static PIDController turnController;
+
+	static final double kP = 0.015;
+	static final double kI = 0.003;
+	static final double kD = 0.10;
+	static final double kF = 0.00;
+
+	static final double kToleranceDegrees = 2.0f;
+
+	public static double rotateToAngleRate;
+	public static boolean rotateToAngle;
+
 	@Override
 	public void robotInit()
 	{
@@ -36,7 +52,24 @@ public class Robot extends IterativeRobot
 		camera.setFPS(60);
 		camera.setExposureAuto();
 		camera.setWhiteBalanceAuto();
-	}	
+
+
+			try {
+					/* Communicate w/navX MXP via the MXP SPI Bus.                                     */
+					/* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+					/* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+					ahrs = new AHRS(SPI.Port.kMXP);
+			} catch (RuntimeException ex ) {
+					DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+			}
+			turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
+			turnController.setInputRange(-180.0f,  180.0f);
+			turnController.setOutputRange(-1.0, 1.0);
+			turnController.setAbsoluteTolerance(kToleranceDegrees);
+			turnController.setContinuous(true);
+
+			rotateToAngle = false;
+	}
 	@Override
 	public void autonomousInit() {
 		autonomousCommand.start(); // schedule the autonomous command (example)
@@ -45,16 +78,21 @@ public class Robot extends IterativeRobot
 	public void autonomousPeriodic()
 	{
 		Scheduler.getInstance().run();
-	}	
+	}
 	@Override
 	public void teleopInit()
 	{
-		autonomousCommand.cancel();	
+		autonomousCommand.cancel();
 	}
 	@Override
 	public void teleopPeriodic()
 	{
 		Scheduler.getInstance().run();
+	}
+
+
+	public void pidWrite(double output) {
+			rotateToAngleRate = output;
 	}
 
 }

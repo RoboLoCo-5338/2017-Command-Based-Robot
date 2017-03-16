@@ -6,6 +6,7 @@ public class Autonomous extends CommandGroup
 {
 	public Autonomous()
 	{
+		
 		switch("CENTERGEAR-RIGHT")
 		{
 			case "CENTERGEAR-LEFT":

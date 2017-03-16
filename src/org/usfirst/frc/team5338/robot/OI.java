@@ -1,13 +1,14 @@
 package org.usfirst.frc.team5338.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.usfirst.frc.team5338.robot;
 
 public class OI
 {
 	private final Joystick joyL = new Joystick(0);
 	private final Joystick joyR = new Joystick(1);
-	public BallState ballState; 
-	public DriveState driveState;	
+	public BallState ballState;
+	public DriveState driveState;
 	public enum Button
 	{
 		OFF, LOWER_INTAKE, UPPER_INTAKE, OUTTAKE,
@@ -22,12 +23,13 @@ public class OI
 	{
 		REVERSE, FORWARD
 	}
-	
+
 	public OI()
 	{
 		ballState = BallState.OFF;
 		driveState = DriveState.REVERSE;
-	}	
+	}
+
 	public Joystick getJoystick(int n)
 	{
 		if(n == 0)
@@ -41,27 +43,27 @@ public class OI
 	{
 		switch(button)
 		{
-		case OFF: 			
+		case OFF:
 			return joyR.getRawButton(5);
 		case LOWER_INTAKE:
 			return joyR.getRawButton(4);
-		case UPPER_INTAKE: 
+		case UPPER_INTAKE:
 			return joyR.getRawButton(6);
-		case OUTTAKE: 	
-			return joyR.getRawButton(3);		
-		case SLOW: 		
+		case OUTTAKE:
+			return joyR.getRawButton(3);
+		case SLOW:
 			return joyR.getRawButton(1);
-		case STRAIGHT:	
+		case STRAIGHT:
 			return joyL.getRawButton(1);
-		case REVERSE: 	
+		case REVERSE:
 			return joyL.getRawButton(2);
-		case FORWARD: 	
-			return joyR.getRawButton(2);			
-		case GEAR: 
+		case FORWARD:
+			return joyR.getRawButton(2);
+		case GEAR:
 			return joyL.getRawButton(5);
-		case WINCH: 	
+		case WINCH:
 			return joyL.getRawButton(6);
-		default: 			
+		default:
 			return false;
 		}
 	}
@@ -76,7 +78,7 @@ public class OI
 		 return (value + 0.04)/0.96;
 		}
 		return 0.0;
-	}	
+	}
 	public double getLeft()
 	{
 		return joystickDeadZone(joyL.getRawAxis(1));
