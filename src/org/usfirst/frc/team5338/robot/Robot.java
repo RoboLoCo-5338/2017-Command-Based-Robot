@@ -29,8 +29,7 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Robot extends IterativeRobot implements PIDOutput
 {
-	private static final SendableChooser<String> autoChooser = new SendableChooser<String>();
-	public static String chosenAuto;
+	public static final SendableChooser<String> autoChooser = new SendableChooser<String>();
 	
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
@@ -79,7 +78,6 @@ public class Robot extends IterativeRobot implements PIDOutput
 	}
 	@Override
 	public void autonomousInit() {
-		chosenAuto = autoChooser.getSelected();
 		autonomousCommand = new Autonomous();
 		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
