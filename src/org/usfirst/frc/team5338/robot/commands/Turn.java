@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Turn extends Command
 {
-	int degrees;
+    double rotateAng;
     public Turn(int angle)
     {
 			Robot.ahrs.reset();
@@ -17,9 +17,8 @@ public class Turn extends Command
 		//
     // 	degrees = angle*12/13;
 		// requires(Robot.drivetrain);
-		// setTimeout((int)(Math.ceil(Math.abs(degrees / 72.5))));
+		setTimeout(3);
      }
-    double rotateAng;
     protected void execute()
     {
     	 rotateAng = (rotateAng*0.8)+0.2*(Robot.rotateToAngleRate);
@@ -43,7 +42,7 @@ public class Turn extends Command
     }
     protected boolean isFinished()
     {
-    	return Math.abs(Robot.ahrs.getAngle() - Robot.turnController.getSetpoint()) < 2.0;
+    	return isTimedOut() || Math.abs(Robot.ahrs.getAngle() - Robot.turnController.getSetpoint()) < Robot.kToleranceDegrees;
 			//2.0 is the tolerance in degrees
     }
     protected void end()
