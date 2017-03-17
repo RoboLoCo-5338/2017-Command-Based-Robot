@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearHandler extends Subsystem
 {
-	private final Compressor COMPRESSOR = new Compressor();
-	private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
+    private final Compressor COMPRESSOR = new Compressor(); 
+    private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
 
     public GearHandler()
 	{
