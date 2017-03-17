@@ -29,8 +29,7 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class Robot extends IterativeRobot implements PIDOutput
 {
-	public static Command autonomousCommand;
-	SendableChooser<String> autoChooser;
+	private static final SendableChooser<String> autoChooser = new SendableChooser<String>();
 	public static String chosenAuto;
 	
 	public static final OI oi = new OI();
@@ -38,10 +37,13 @@ public class Robot extends IterativeRobot implements PIDOutput
 	public static final BallHandler ballhandler = new BallHandler();
 	public static final Winch winch = new Winch();
 	public static final GearHandler gearhandler = new GearHandler();
-
-	public static AHRS ahrs;
-	public static PIDController turnController;
-
+	
+	private static final UsbCamera camera = CameraServer.getInstance();
+	private static Command autonomousCommand;
+	
+	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
+	
+	private static PIDController turnController;
 	private static final double kP = 0.03;
 	private static final double kI = 0.00;
 	private static final double kD = 0.000001;
@@ -54,13 +56,12 @@ public class Robot extends IterativeRobot implements PIDOutput
 	@Override
 	public void robotInit()
 	{
-		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.startAutomaticCapture();
 		camera.setResolution(320, 320);
 		camera.setFPS(60);
 		camera.setExposureAuto();
 		camera.setWhiteBalanceAuto();
 		
-		autoChooser = new SendableChooser<String>();
 		autoChooser.addDefault("Drive straight and place center gear", "CENTERGEAR");
 		autoChooser.addObject("Drive straight and place center gear and then go left", "CENTERGEAR-LEFT");
 		autoChooser.addObject("Drive straight and place center gear and then go right", "CENTERGEAR-RIGHT");
@@ -69,15 +70,6 @@ public class Robot extends IterativeRobot implements PIDOutput
 		autoChooser.addObject("Drive straight across baseline", "BASELINE");
 		autoChooser.addObject("Testing", "TEST");
 
-		try
-		{
-			ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));
-		}
-		catch(RuntimeException ex) 
-		{
-			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
-		
 		turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
 		turnController.setInputRange(-180.0f, 180.0f);
 		turnController.setOutputRange(-1.0, 1.0);
@@ -85,8 +77,6 @@ public class Robot extends IterativeRobot implements PIDOutput
 		turnController.setContinuous(true);
 
 		rotateToAngle = false;
-
-
 	}
 
 	@Override
