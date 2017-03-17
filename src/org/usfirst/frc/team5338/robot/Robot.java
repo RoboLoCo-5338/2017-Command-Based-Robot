@@ -96,7 +96,6 @@ public class Robot extends IterativeRobot implements PIDOutput
 	public void pidWrite(double output)
 	{
 		rotateToAngleRate = output;
-		SmartDashboard.putNumber("rotate", output);
 	}
 
 }
