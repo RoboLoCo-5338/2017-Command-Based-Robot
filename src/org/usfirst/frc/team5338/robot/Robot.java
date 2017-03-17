@@ -29,7 +29,7 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Robot extends IterativeRobot implements PIDOutput
 {
-	public static final SendableChooser<String> autoChooser = new SendableChooser<String>();
+	public static final SendableChooser<String> autonomousChooser = new SendableChooser<String>();
 	
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
@@ -61,13 +61,13 @@ public class Robot extends IterativeRobot implements PIDOutput
 		camera.setExposureAuto();
 		camera.setWhiteBalanceAuto();
 		
-		autoChooser.addDefault("Drive straight and place center gear", "CENTERGEAR");
-		autoChooser.addObject("Drive straight and place center gear and then go left", "CENTERGEAR-LEFT");
-		autoChooser.addObject("Drive straight and place center gear and then go right", "CENTERGEAR-RIGHT");
-		autoChooser.addObject("Drive straight and place left gear and then go across baseline", "LEFTGEAR");
-		autoChooser.addObject("Drive straight and place right gear and then across baseline", "RIGHTGEAR");
-		autoChooser.addObject("Drive straight across baseline", "BASELINE");
-		autoChooser.addObject("Testing", "TEST");
+		autonomousChooser.addDefault("Drive straight and place center gear", "CENTERGEAR");
+		autonomousChooser.addObject("Drive straight and place center gear and then go left", "CENTERGEAR-LEFT");
+		autonomousChooser.addObject("Drive straight and place center gear and then go right", "CENTERGEAR-RIGHT");
+		autonomousChooser.addObject("Drive straight and place left gear and then go across baseline", "LEFTGEAR");
+		autonomousChooser.addObject("Drive straight and place right gear and then across baseline", "RIGHTGEAR");
+		autonomousChooser.addObject("Drive straight across baseline", "BASELINE");
+		autonomousChooser.addObject("Testing", "TEST");
 
 		turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
 		turnController.setInputRange(-180.0f, 180.0f);
