@@ -8,8 +8,7 @@ public class Autonomous extends CommandGroup
 {
 	public Autonomous()
 	{
-		
-		switch(Robot.chosenAuto)
+		switch(Robot.autonomousChooser.getSelected())
 		{
 			case "CENTERGEAR":
 				addSequential(new MoveSlowly(4));
