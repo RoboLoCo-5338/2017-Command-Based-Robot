@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Turn extends Command
 {
-    double rotateAng;
+    private double rotateAng = 0;
     public Turn(int angle)
     {
-			Robot.ahrs.reset();
-			Robot.ahrs.zeroYaw();
-			Robot.turnController.setSetpoint(angle);
-			Robot.turnController.enable();
-			rotateAng=0;
+		requires(Robot.drivetrain);
+		setTimeout(3);
+		Robot.ahrs.reset();
+		Robot.ahrs.zeroYaw();
+		Robot.turnController.setSetpoint(angle);
+		Robot.turnController.enable();
 		//
     // 	degrees = angle*12/13;
-		// requires(Robot.drivetrain);
-		setTimeout(3);
+		
      }
     protected void execute()
     {
