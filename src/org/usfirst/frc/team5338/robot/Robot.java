@@ -43,12 +43,12 @@ public class Robot extends IterativeRobot implements PIDOutput
 	
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
 	
-	private static PIDController turnController;
+	public static PIDController turnController;
 	private static final double kP = 0.03;
 	private static final double kI = 0.00;
 	private static final double kD = 0.000001;
 	private static final double kF = 0.00;
-	private static final double kToleranceDegrees = 2.0f;
+	public static final double kToleranceDegrees = 2.0f;
 
 	public static double rotateToAngleRate;
 	public static boolean rotateToAngle;
