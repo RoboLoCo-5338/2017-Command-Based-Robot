@@ -27,8 +27,9 @@ import edu.wpi.first.wpilibj.SPI;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot implements PIDOutput {
-	Command autonomousCommand;
+public class Robot extends IterativeRobot implements PIDOutput
+{
+	public static Command autonomousCommand;
 	SendableChooser<String> autoChooser;
 	public static String chosenAuto;
 	
@@ -41,17 +42,18 @@ public class Robot extends IterativeRobot implements PIDOutput {
 	public static AHRS ahrs;
 	public static PIDController turnController;
 
-	static final double kP = 0.03;
-	static final double kI = 0.00;
-	static final double kD = 0.000001;
-	static final double kF = 0.00;
-	static final double kToleranceDegrees = 2.0f;
+	private static final double kP = 0.03;
+	private static final double kI = 0.00;
+	private static final double kD = 0.000001;
+	private static final double kF = 0.00;
+	private static final double kToleranceDegrees = 2.0f;
 
 	public static double rotateToAngleRate;
 	public static boolean rotateToAngle;
 
 	@Override
-	public void robotInit() {
+	public void robotInit()
+	{
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 320);
 		camera.setFPS(60);
@@ -59,18 +61,23 @@ public class Robot extends IterativeRobot implements PIDOutput {
 		camera.setWhiteBalanceAuto();
 		
 		autoChooser = new SendableChooser<String>();
-		autoChooser.addDefault("Do nothing", "NONE");
-		autoChooser.addObject("Drive straight and place center gear", "CENTERGEAR");
+		autoChooser.addDefault("Drive straight and place center gear", "CENTERGEAR");
 		autoChooser.addObject("Drive straight and place center gear and then go left", "CENTERGEAR-LEFT");
 		autoChooser.addObject("Drive straight and place center gear and then go right", "CENTERGEAR-RIGHT");
-		//TODO add the rest of the autos
-		
+		autoChooser.addObject("Drive straight and place left gear and then go across baseline", "LEFTGEAR");
+		autoChooser.addObject("Drive straight and place right gear and then across baseline", "RIGHTGEAR");
+		autoChooser.addObject("Drive straight across baseline", "BASELINE");
+		autoChooser.addObject("Testing", "TEST");
 
-		try {
+		try
+		{
 			ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));
-		} catch (RuntimeException ex) {
+		}
+		catch(RuntimeException ex) 
+		{
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		
 		turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
 		turnController.setInputRange(-180.0f, 180.0f);
 		turnController.setOutputRange(-1.0, 1.0);
