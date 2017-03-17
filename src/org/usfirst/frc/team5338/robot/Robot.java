@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.SPI;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -75,33 +75,28 @@ public class Robot extends IterativeRobot implements PIDOutput
 		turnController.setOutputRange(-1.0, 1.0);
 		turnController.setAbsoluteTolerance(kToleranceDegrees);
 		turnController.setContinuous(true);
-
 		rotateToAngle = false;
 	}
-
 	@Override
 	public void autonomousInit() {
 		chosenAuto = autoChooser.getSelected();
 		autonomousCommand = new Autonomous();
 		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
-
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
 	@Override
 	public void teleopInit() {
 		autonomousCommand.cancel();
 	}
-
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
-	public void pidWrite(double output) {
+	public void pidWrite(double output)
+	{
 		rotateToAngleRate = output;
 		SmartDashboard.putNumber("rotate", output);
 	}
