@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem
 {
-	public final CANTalon DRIVEL1 = new CANTalon(4);
+    public final CANTalon DRIVEL1 = new CANTalon(4);
     public final CANTalon DRIVEL2 = new CANTalon(3);
     public final CANTalon DRIVER1 = new CANTalon(2);
     public final CANTalon DRIVER2 = new CANTalon(1);
