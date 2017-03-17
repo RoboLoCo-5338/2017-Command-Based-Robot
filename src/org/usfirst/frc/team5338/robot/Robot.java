@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot implements PIDOutput {
 	@Override
 	public void robotInit() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(320, 240);
+		camera.setResolution(320, 320);
 		camera.setFPS(60);
 		camera.setExposureAuto();
 		camera.setWhiteBalanceAuto();
@@ -61,15 +61,13 @@ public class Robot extends IterativeRobot implements PIDOutput {
 		autoChooser = new SendableChooser<String>();
 		autoChooser.addDefault("Do nothing", "NONE");
 		autoChooser.addObject("Drive straight and place center gear", "CENTERGEAR");
+		autoChooser.addObject("Drive straight and place center gear and then go left", "CENTERGEAR-LEFT");
+		autoChooser.addObject("Drive straight and place center gear and then go right", "CENTERGEAR-RIGHT");
 		//TODO add the rest of the autos
 		
 
 		try {
-			/* Communicate w/navX MXP via the MXP SPI Bus.                                     */
-			/* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
-			/* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
-
-			ahrs = new AHRS(SPI.Port.kMXP);
+			ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));
 		} catch (RuntimeException ex) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
