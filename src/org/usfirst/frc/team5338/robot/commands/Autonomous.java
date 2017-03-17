@@ -2,13 +2,19 @@ package org.usfirst.frc.team5338.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+import org.usfirst.frc.team5338.robot.Robot;
+
 public class Autonomous extends CommandGroup
 {
 	public Autonomous()
 	{
 		
-		switch("CENTERGEAR-LEFT")
+		switch(Robot.chosenAuto)
 		{
+			case "CENTERGEAR":
+				addSequential(new MoveSlowly(4));
+				addSequential(new DepositGear());		
+				break;
 			case "CENTERGEAR-LEFT":
 				addSequential(new MoveSlowly(4));
 				addSequential(new DepositGear());

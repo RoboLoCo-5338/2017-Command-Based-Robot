@@ -1,4 +1,5 @@
 package org.usfirst.frc.team5338.robot;
+
 import org.usfirst.frc.team5338.robot.commands.Autonomous;
 import org.usfirst.frc.team5338.robot.subsystems.BallHandler;
 import org.usfirst.frc.team5338.robot.subsystems.DriveTrain;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -25,15 +27,16 @@ import edu.wpi.first.wpilibj.SPI;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot implements PIDOutput
-{
+public class Robot extends IterativeRobot implements PIDOutput {
 	Command autonomousCommand;
+	SendableChooser<String> autoChooser;
+	public static String chosenAuto;
+	
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
 	public static final BallHandler ballhandler = new BallHandler();
 	public static final Winch winch = new Winch();
 	public static final GearHandler gearhandler = new GearHandler();
-
 
 	public static AHRS ahrs;
 	public static PIDController turnController;
@@ -48,58 +51,64 @@ public class Robot extends IterativeRobot implements PIDOutput
 	public static boolean rotateToAngle;
 
 	@Override
-	public void robotInit()
-	{
+	public void robotInit() {
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
 		camera.setFPS(60);
 		camera.setExposureAuto();
 		camera.setWhiteBalanceAuto();
+		
+		autoChooser = new SendableChooser<String>();
+		autoChooser.addDefault("Do nothing", "NONE");
+		autoChooser.addObject("Drive straight and place center gear", "CENTERGEAR");
+		//TODO add the rest of the autos
+		
 
+		try {
+			/* Communicate w/navX MXP via the MXP SPI Bus.                                     */
+			/* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+			/* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
 
-			try {
-					/* Communicate w/navX MXP via the MXP SPI Bus.                                     */
-					/* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
-					/* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
-					ahrs = new AHRS(SPI.Port.kMXP);
-			} catch (RuntimeException ex ) {
-					DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
-			}
-			turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
-			turnController.setInputRange(-180.0f,  180.0f);
-			turnController.setOutputRange(-1.0, 1.0);
-			turnController.setAbsoluteTolerance(kToleranceDegrees);
-			turnController.setContinuous(true);
+			ahrs = new AHRS(SPI.Port.kMXP);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
+		turnController = new PIDController(kP, kI, kD, kF, ahrs, this);
+		turnController.setInputRange(-180.0f, 180.0f);
+		turnController.setOutputRange(-1.0, 1.0);
+		turnController.setAbsoluteTolerance(kToleranceDegrees);
+		turnController.setContinuous(true);
 
-			rotateToAngle = false;
-			
-			autonomousCommand = new Autonomous();
+		rotateToAngle = false;
+
 
 	}
+
 	@Override
 	public void autonomousInit() {
+		chosenAuto = autoChooser.getSelected();
+		autonomousCommand = new Autonomous();
 		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
+
 	@Override
-	public void autonomousPeriodic()
-	{
+	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
+
 	@Override
-	public void teleopInit()
-	{
+	public void teleopInit() {
 		autonomousCommand.cancel();
 	}
+
 	@Override
-	public void teleopPeriodic()
-	{
+	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-
 	public void pidWrite(double output) {
-			rotateToAngleRate = output;
-			SmartDashboard.putNumber("rotate", output);
+		rotateToAngleRate = output;
+		SmartDashboard.putNumber("rotate", output);
 	}
 
 }
