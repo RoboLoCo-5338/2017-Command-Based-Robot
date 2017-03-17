@@ -9,19 +9,21 @@ public class Turn extends Command
 	int degrees;
     public Turn(int angle)
     {
-			Robot.ahrs.ZeroYaw();
-			Robot.ahrs.SetSetpoint(angle);
-			Robot.ahrs.Enable();
-
+			Robot.ahrs.reset();
+			Robot.ahrs.zeroYaw();
+			Robot.turnController.setSetpoint(angle);
+			Robot.turnController.enable();
+			rotateAng=0;
 		//
     // 	degrees = angle*12/13;
 		// requires(Robot.drivetrain);
 		// setTimeout((int)(Math.ceil(Math.abs(degrees / 72.5))));
-    // }
-
+     }
+    double rotateAng;
     protected void execute()
     {
-			Robot.drivetrain.drive(-0.25 * Robot.rotateToAngleRate, 0.25 * Robot.rotateToAngleRate);
+    	 rotateAng = (rotateAng*0.8)+0.2*(Robot.rotateToAngleRate);
+			Robot.drivetrain.drive(-rotateAng*0.5,rotateAng*0.5);
 
     	// if(timeSinceInitialized() <= Math.abs(degrees / 72.5))
     	// {
@@ -37,15 +39,17 @@ public class Turn extends Command
     	// else
     	// {
     	// 	Robot.drivetrain.drive(0,0);
-    	// }
+    	//}
     }
     protected boolean isFinished()
     {
-    	return Abs(Robot.ahrs.getAngle() - Robot.ahrs.getSetpoint()) < 2.0;
+    	return Math.abs(Robot.ahrs.getAngle() - Robot.turnController.getSetpoint()) < 2.0;
 			//2.0 is the tolerance in degrees
     }
     protected void end()
     {
     	Robot.drivetrain.drive(0.0, 0.0);
+    	Robot.turnController.disable();
+    	Robot.ahrs.reset();
     }
 }

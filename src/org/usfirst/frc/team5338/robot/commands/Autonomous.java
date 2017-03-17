@@ -7,7 +7,7 @@ public class Autonomous extends CommandGroup
 	public Autonomous()
 	{
 		
-		switch("CENTERGEAR-RIGHT")
+		switch("CENTERGEAR-LEFT")
 		{
 			case "CENTERGEAR-LEFT":
 				addSequential(new MoveSlowly(4));
@@ -46,6 +46,9 @@ public class Autonomous extends CommandGroup
 				break;
 			case "BASELINE":
 				addSequential(new MoveFast(4));
+				break;
+			case "TEST":
+				addSequential(new Turn(90));
 				break;
 			default:
 				break;

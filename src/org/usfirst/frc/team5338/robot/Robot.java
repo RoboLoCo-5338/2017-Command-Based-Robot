@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -36,11 +38,10 @@ public class Robot extends IterativeRobot implements PIDOutput
 	public static AHRS ahrs;
 	public static PIDController turnController;
 
-	static final double kP = 0.015;
-	static final double kI = 0.003;
-	static final double kD = 0.10;
+	static final double kP = 0.03;
+	static final double kI = 0.00;
+	static final double kD = 0.000001;
 	static final double kF = 0.00;
-
 	static final double kToleranceDegrees = 2.0f;
 
 	public static double rotateToAngleRate;
@@ -49,7 +50,6 @@ public class Robot extends IterativeRobot implements PIDOutput
 	@Override
 	public void robotInit()
 	{
-		autonomousCommand = new Autonomous();
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
 		camera.setFPS(60);
@@ -72,6 +72,9 @@ public class Robot extends IterativeRobot implements PIDOutput
 			turnController.setContinuous(true);
 
 			rotateToAngle = false;
+			
+			autonomousCommand = new Autonomous();
+
 	}
 	@Override
 	public void autonomousInit() {
@@ -96,6 +99,7 @@ public class Robot extends IterativeRobot implements PIDOutput
 
 	public void pidWrite(double output) {
 			rotateToAngleRate = output;
+			SmartDashboard.putNumber("rotate", output);
 	}
 
 }
