@@ -6,24 +6,23 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Turn extends Command
 {
-	int degrees;
+    private double rotateAng = 0;
     public Turn(int angle)
     {
-			Robot.ahrs.reset();
-			Robot.ahrs.zeroYaw();
-			Robot.turnController.setSetpoint(angle);
-			Robot.turnController.enable();
-			rotateAng=0;
+		requires(Robot.drivetrain);
+		setTimeout(3);
+		Robot.ahrs.reset();
+		Robot.ahrs.zeroYaw();
+		Robot.turnController.setSetpoint(angle);
+		Robot.turnController.enable();
 		//
     // 	degrees = angle*12/13;
-		// requires(Robot.drivetrain);
-		// setTimeout((int)(Math.ceil(Math.abs(degrees / 72.5))));
+		
      }
-    double rotateAng;
     protected void execute()
     {
-    	 rotateAng = (rotateAng*0.8)+0.2*(Robot.rotateToAngleRate);
-			Robot.drivetrain.drive(-rotateAng*0.5,rotateAng*0.5);
+    	 rotateAng = (rotateAng*0.6) + 0.4*(Robot.rotateToAngleRate);
+			Robot.drivetrain.drive(-rotateAng * 0.5,rotateAng * 0.5);
 
     	// if(timeSinceInitialized() <= Math.abs(degrees / 72.5))
     	// {
@@ -43,7 +42,7 @@ public class Turn extends Command
     }
     protected boolean isFinished()
     {
-    	return Math.abs(Robot.ahrs.getAngle() - Robot.turnController.getSetpoint()) < 2.0;
+    	return isTimedOut() || Robot.turnController.onTarget();
 			//2.0 is the tolerance in degrees
     }
     protected void end()
@@ -51,5 +50,6 @@ public class Turn extends Command
     	Robot.drivetrain.drive(0.0, 0.0);
     	Robot.turnController.disable();
     	Robot.ahrs.reset();
+		Robot.ahrs.zeroYaw();
     }
 }

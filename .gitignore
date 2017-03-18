@@ -1,5 +1,6 @@
-/build
-/dist
-/bin
-*.class
-*.jar
+.DS_Store
+/dist/*
+/bin/*
+/build/*
+.jar
+.class

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5338.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-//import org.usfirst.frc.team5338.robot;
 
 public class OI
 {
@@ -69,13 +68,13 @@ public class OI
 	}
 	private double joystickDeadZone(double value)
 	{
-		if (value > 0.04 || value < -0.04)
+		if (value > 0.08 || value < -0.08)
 		{
-		 return (value - 0.04)/0.96;
+		 return (value - 0.08)/0.92;
 		}
-		else if (value < -0.04)
+		else if (value < -0.08)
 		{
-		 return (value + 0.04)/0.96;
+		 return (value + 0.08)/0.92;
 		}
 		return 0.0;
 	}

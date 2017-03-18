@@ -17,7 +17,6 @@ public class MoveFast extends Command
     {
     	if(seconds > 0)
     	{
-    		
     		Robot.drivetrain.drive(-0.75, -0.75);
     	}
     	else

@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearHandler extends Subsystem
 {
-	private final Compressor COMPRESSOR = new Compressor();
-	private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
+    private final Compressor COMPRESSOR = new Compressor(); 
+    private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
 
     public GearHandler()
 	{
@@ -25,9 +25,13 @@ public class GearHandler extends Subsystem
     public void handleGears(OI oi)
 	{
 		if(oi.get(OI.Button.GEAR))
+		{
 			DOOR.set(DoubleSolenoid.Value.kReverse);
+		}
 		else
+		{
 			DOOR.set(DoubleSolenoid.Value.kForward);
+		}
 	}
     public void setGears(DoubleSolenoid.Value setting){
 		DOOR.set(setting);
