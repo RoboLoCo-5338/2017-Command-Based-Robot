@@ -29,7 +29,7 @@ public class Winch extends Subsystem
 		}
 		else if(oi.get(OI.Button.WINCH))
 		{
-			LIFT.set(-0.99);
+			LIFT.set(-0.90);
 			return;
 		}
 		else

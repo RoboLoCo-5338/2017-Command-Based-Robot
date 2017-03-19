@@ -68,15 +68,15 @@ public class OI
 	}
 	private double joystickDeadZone(double value)
 	{
-		if (value > 0.08 || value < -0.08)
+		if (value > 0.06)
 		{
-		 return (value - 0.08)/0.92;
+		 return (value - 0.06)/0.94;
 		}
-		else if (value < -0.08)
+		else if (value < -0.06)
 		{
-		 return (value + 0.08)/0.92;
+		 return (value + 0.06)/0.94;
 		}
-		return 0.0;
+		return value;
 	}
 	public double getLeft()
 	{
