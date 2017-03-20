@@ -68,13 +68,13 @@ public class OI
 	}
 	private double joystickDeadZone(double value)
 	{
-		if (value > 0.06)
+		if (value > 0.05)
 		{
-		 return (value - 0.06)/0.94;
+		 return (value - 0.05)/0.95;
 		}
-		else if (value < -0.06)
+		else if (value < -0.05)
 		{
-		 return (value + 0.06)/0.94;
+		 return (value + 0.05)/0.95;
 		}
 		return value;
 	}

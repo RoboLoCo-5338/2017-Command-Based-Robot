@@ -7,7 +7,7 @@ public class Autonomous extends CommandGroup
 {
 	public Autonomous()
 	{
-		switch(SmartDashboard.getString("AUTONOMOUS CHOICE", "ERROR"))
+		switch(SmartDashboard.getString("AUTONOMOUS CHOICE", "NO CHOICE MADE"))
 		{
 			case "CENTERGEAR":
 				addSequential(new MoveSlowly(4));

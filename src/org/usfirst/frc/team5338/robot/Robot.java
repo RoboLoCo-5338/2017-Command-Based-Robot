@@ -11,9 +11,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,7 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot implements PIDOutput
+public class Robot extends IterativeRobot
 {
 	public static SendableChooser<String> autonomousChooser;
 	
@@ -39,16 +36,7 @@ public class Robot extends IterativeRobot implements PIDOutput
 	
 	private static Command autonomousCommand;
 	
-	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
-	
-	public static PIDController turnController;
-	private static final double kP = 0.03;
-	private static final double kI = 0.00;
-	private static final double kD = 0.000001;
-	private static final double kF = 0.00;
-	public static final double kToleranceDegrees = 1.0f;
-
-	public static double rotateToAngleRate;
+	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
 
 	@Override
 	public void robotInit()
@@ -56,23 +44,15 @@ public class Robot extends IterativeRobot implements PIDOutput
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 320);
 		camera.setFPS(60);
-		camera.setExposureAuto();
-		camera.setWhiteBalanceAuto();
-		
-		ahrs.setPIDSourceType(PIDSourceType.kRate);
+		camera.setExposureHoldCurrent();
+		camera.setWhiteBalanceHoldCurrent();
+		camera.setBrightness(camera.getBrightness());
 		
 		SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
-
-		turnController = new PIDController(kP, kI, kD, kF, ahrs, this, 0.01);
-		turnController.setInputRange(0.0f, 360.0f);
-		turnController.setOutputRange(-1.0, 1.0);
-		turnController.setAbsoluteTolerance(kToleranceDegrees);
-		turnController.setContinuous(true);
 	}
 	@Override
 	public void autonomousInit()
 	{
-		System.out.println("HI");
 		autonomousCommand = new Autonomous();
 		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
@@ -94,9 +74,5 @@ public class Robot extends IterativeRobot implements PIDOutput
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-	}
-	public void pidWrite(double output)
-	{
-		rotateToAngleRate = output;
 	}
 }
