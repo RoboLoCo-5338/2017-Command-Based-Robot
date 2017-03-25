@@ -9,18 +9,18 @@ public class HandleGears extends Command
 {
     public HandleGears()
     {
-		requires(Robot.gearhandler);
-	}
+	requires(Robot.gearhandler);
+    }
     protected void execute()
     {
-    	Robot.gearhandler.handleGears(Robot.oi);
+	Robot.gearhandler.handleGears(Robot.oi);
     }
     protected boolean isFinished()
     {
-        return false;
+	return false;
     }
     protected void end()
     {
-    	Robot.gearhandler.setGears(DoubleSolenoid.Value.kOff);
+	Robot.gearhandler.setGears(DoubleSolenoid.Value.kOff);
     }
 }

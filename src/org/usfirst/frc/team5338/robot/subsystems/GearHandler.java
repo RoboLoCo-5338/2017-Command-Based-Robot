@@ -13,27 +13,27 @@ public class GearHandler extends Subsystem
     private final DoubleSolenoid DOOR = new DoubleSolenoid(1, 2); 
 
     public GearHandler()
-	{
-		super();
-		COMPRESSOR.setClosedLoopControl(true);
-		COMPRESSOR.start(); 
-	}
+    {
+	super();
+	COMPRESSOR.setClosedLoopControl(true);
+	COMPRESSOR.start(); 
+    }
     public void initDefaultCommand()
     {
-    	setDefaultCommand(new HandleGears());
+	setDefaultCommand(new HandleGears());
     }
     public void handleGears(OI oi)
+    {
+	if(oi.get(OI.Button.GEAR))
 	{
-		if(oi.get(OI.Button.GEAR))
-		{
-			DOOR.set(DoubleSolenoid.Value.kReverse);
-		}
-		else
-		{
-			DOOR.set(DoubleSolenoid.Value.kForward);
-		}
+	    DOOR.set(DoubleSolenoid.Value.kReverse);
 	}
+	else
+	{
+	    DOOR.set(DoubleSolenoid.Value.kForward);
+	}
+    }
     public void setGears(DoubleSolenoid.Value setting){
-		DOOR.set(setting);
+	DOOR.set(setting);
     }
 }

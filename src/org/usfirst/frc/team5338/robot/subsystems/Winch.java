@@ -9,36 +9,36 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem
 {
-	private final CANTalon LIFT = new CANTalon(7);
+    private final CANTalon LIFT = new CANTalon(7);
 
     public Winch()
-	{
-		super();
-		LIFT.enable();
-	}
+    {
+	super();
+	LIFT.enable();
+    }
     public void initDefaultCommand() 
     {
-    	setDefaultCommand(new LiftRobot());
+	setDefaultCommand(new LiftRobot());
     }
     public void liftRobot(OI oi)
+    {
+	if(oi.get(OI.Button.WINCH) && oi.get(OI.Button.SLOW))
 	{
-		if(oi.get(OI.Button.WINCH) && oi.get(OI.Button.SLOW))
-		{
-			LIFT.set(-0.25);
-			return;
-		}
-		else if(oi.get(OI.Button.WINCH))
-		{
-			LIFT.set(-0.95);
-			return;
-		}
-		else
-		{
-		stopLift();
-		}
+	    LIFT.set(-0.25);
+	    return;
 	}
+	else if(oi.get(OI.Button.WINCH))
+	{
+	    LIFT.set(-0.95);
+	    return;
+	}
+	else
+	{
+	    stopLift();
+	}
+    }
     public void stopLift()
-	{
-    	LIFT.set(0.0);
-	}
+    {
+	LIFT.set(0.0);
+    }
 }

@@ -26,53 +26,53 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot
 {
-	public static SendableChooser<String> autonomousChooser;
-	
-	public static final OI oi = new OI();
-	public static final DriveTrain drivetrain = new DriveTrain();
-	public static final BallHandler ballhandler = new BallHandler();
-	public static final Winch winch = new Winch();
-	public static final GearHandler gearhandler = new GearHandler();
-	
-	private static Command autonomousCommand;
-	
-	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
+    public static SendableChooser<String> autonomousChooser;
 
-	@Override
-	public void robotInit()
+    public static final OI oi = new OI();
+    public static final DriveTrain drivetrain = new DriveTrain();
+    public static final BallHandler ballhandler = new BallHandler();
+    public static final Winch winch = new Winch();
+    public static final GearHandler gearhandler = new GearHandler();
+
+    private static Command autonomousCommand;
+
+    public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
+
+    @Override
+    public void robotInit()
+    {
+	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+	camera.setResolution(320, 320);
+	camera.setFPS(60);
+	camera.setExposureHoldCurrent();
+	camera.setWhiteBalanceHoldCurrent();
+	camera.setBrightness(camera.getBrightness());
+
+	SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
+    }
+    @Override
+    public void autonomousInit()
+    {
+	autonomousCommand = new Autonomous();
+	autonomousCommand.start(); // schedule the autonomous command (example)
+    }
+    @Override
+    public void autonomousPeriodic() {
+	Scheduler.getInstance().run();
+    }
+    @Override
+    public void teleopInit()
+    {
+	try
 	{
-		/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		camera.setResolution(320, 320);
-		camera.setFPS(60);
-		camera.setExposureHoldCurrent();
-		camera.setWhiteBalanceHoldCurrent();
-		camera.setBrightness(camera.getBrightness());*/
-		
-		SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
+	    autonomousCommand.cancel();
 	}
-	@Override
-	public void autonomousInit()
+	catch(Exception e)
 	{
-		autonomousCommand = new Autonomous();
-		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
-	@Override
-	public void teleopInit()
-	{
-		try
-		{
-		autonomousCommand.cancel();
-		}
-		catch(Exception e)
-		{
-		}
-	}
-	@Override
-	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    }
+    @Override
+    public void teleopPeriodic() {
+	Scheduler.getInstance().run();
+    }
 }
