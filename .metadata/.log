@@ -470,3 +470,9 @@ java.io.FileNotFoundException: /Applications/Eclipse.app/Contents/MacOS/WPILib I
 
 !ENTRY WPILib_Java_Robot_Development 1 0 2017-03-25 13:28:51.144
 !MESSAGE Updating projects
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2017-03-25 13:42:45.883
+!MESSAGE Running ant file: /Users/Arvind/Documents/workspace/2017-Command-Based-Robot-master/build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2017-03-25 13:42:45.884
+!MESSAGE Targets: deploy, Mode: run
