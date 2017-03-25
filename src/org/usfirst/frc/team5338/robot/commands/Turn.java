@@ -3,7 +3,6 @@ package org.usfirst.frc.team5338.robot.commands;
 import org.usfirst.frc.team5338.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Turn extends PIDCommand
 {
@@ -11,32 +10,26 @@ public class Turn extends PIDCommand
     {
 	super(0.1, 0.1, 0.1, 0.005);
 	requires(Robot.drivetrain);
-	getPIDController().setAbsoluteTolerance(0.5);
-	getPIDController().setToleranceBuffer(5);
-	getPIDController().setOutputRange(0.0, 0.50);;
 	double targetHeading = (Robot.ahrs.getFusedHeading() + angle) % 360;
-	if(targetHeading % 360 < 0)
+	if(targetHeading < 0)
 	{
-	    setSetpoint(360 + (targetHeading % 360));
+	    setSetpoint(360 + targetHeading);
 	}
 	else
 	{
-	    setSetpoint(targetHeading % 360);
+	    setSetpoint(targetHeading);
 	}
-	SmartDashboard.putData("PID Name", getPIDController());
-	SmartDashboard.putNumber("Starting Heading", Robot.ahrs.getFusedHeading());
-	setTimeout(2);
+	setTimeout(4);
     }
     protected void execute()
     {
     }
     protected boolean isFinished()
     {
-	return isTimedOut() || getPIDController().onTarget();
+	return isTimedOut();
     }
     protected void end()
     {
-	SmartDashboard.putNumber("Finished Heading", Robot.ahrs.getFusedHeading());
 	Robot.drivetrain.drive(0.0, 0.0);
     }
     protected double returnPIDInput()
