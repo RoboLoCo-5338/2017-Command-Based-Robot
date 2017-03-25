@@ -41,12 +41,12 @@ public class Robot extends IterativeRobot
     @Override
     public void robotInit()
     {
-	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-	camera.setResolution(320, 320);
+	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+	camera.setResolution(360, 360);
 	camera.setFPS(60);
 	camera.setExposureHoldCurrent();
 	camera.setWhiteBalanceHoldCurrent();
-	camera.setBrightness(camera.getBrightness());
+	camera.setBrightness(camera.getBrightness());*/
 
 	SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
     }
