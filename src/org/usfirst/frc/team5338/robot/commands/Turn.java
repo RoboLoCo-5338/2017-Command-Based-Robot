@@ -8,11 +8,8 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(0.1, 0.1, 0.1, 0.005);
+	super(0.15, 0.15, 0.15, 0.005);
 	requires(Robot.drivetrain);
-	getPIDController().setAbsoluteTolerance(1.0);
-	getPIDController().setToleranceBuffer(3);
-	getPIDController().setOutputRange(0.0, 0.75);
 	double targetHeading = (Robot.ahrs.getFusedHeading() + angle) % 360;
 	if(targetHeading < 0)
 	{
@@ -22,7 +19,7 @@ public class Turn extends PIDCommand
 	{
 	    setSetpoint(targetHeading);
 	}
-	setTimeout(5);
+	setTimeout(4);
     }
     protected void execute()
     {
@@ -41,6 +38,6 @@ public class Turn extends PIDCommand
     }
     protected void usePIDOutput(double output)
     {
-	Robot.drivetrain.drive(-output, output);
+	Robot.drivetrain.drive(-output / 2, output / 2);
     }
 }
