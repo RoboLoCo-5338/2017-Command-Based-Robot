@@ -49,6 +49,9 @@ public class Robot extends IterativeRobot
 	camera.setBrightness(camera.getBrightness());*/
 
 	SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
+	SmartDashboard.putString("P VALUE", "");
+	SmartDashboard.putString("I VALUE", "");
+	SmartDashboard.putString("D VALUE", "");
     }
     @Override
     public void autonomousInit()
