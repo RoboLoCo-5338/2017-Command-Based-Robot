@@ -52,7 +52,7 @@ public class Autonomous extends CommandGroup
 	    addSequential(new MoveFast(4));
 	    break;
 	case "TEST":
-	    addSequential(new Turn(90));
+	    addSequential(new Turn(-90));
 	    break;
 	default:
 	    break;
