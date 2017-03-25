@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Turn extends PIDCommand
 {
-    static double p = Double.parseDouble(SmartDashboard.getString("P VALUE", "0.0"));
-    static double i = Double.parseDouble(SmartDashboard.getString("I VALUE", "0.0"));
-    static double d = Double.parseDouble(SmartDashboard.getString("D VALUE", "0.0"));
     public Turn(int angle)
     {
-	super(p, i, d, 0.005);
+	super(Double.parseDouble(SmartDashboard.getString("P VALUE", "0.0")), 
+		Double.parseDouble(SmartDashboard.getString("I VALUE", "0.0")), 
+		Double.parseDouble(SmartDashboard.getString("D VALUE", "0.0")), 0.005);
 	requires(Robot.drivetrain);
 	getPIDController().setAbsoluteTolerance(0.5);
 	getPIDController().setToleranceBuffer(5);
