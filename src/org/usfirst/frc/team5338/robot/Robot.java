@@ -49,9 +49,6 @@ public class Robot extends IterativeRobot
 	camera.setBrightness(camera.getBrightness());*/
 
 	SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
-	SmartDashboard.putString("P VALUE", "0.0");
-	SmartDashboard.putString("I VALUE", "0.0");
-	SmartDashboard.putString("D VALUE", "0.0");
     }
     @Override
     public void autonomousInit()
@@ -60,7 +57,8 @@ public class Robot extends IterativeRobot
 	autonomousCommand.start(); // schedule the autonomous command (example)
     }
     @Override
-    public void autonomousPeriodic() {
+    public void autonomousPeriodic()
+    {
 	Scheduler.getInstance().run();
     }
     @Override
@@ -75,7 +73,8 @@ public class Robot extends IterativeRobot
 	}
     }
     @Override
-    public void teleopPeriodic() {
+    public void teleopPeriodic()
+    {
 	Scheduler.getInstance().run();
     }
 }
