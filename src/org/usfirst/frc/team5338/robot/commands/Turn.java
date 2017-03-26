@@ -12,7 +12,7 @@ public class Turn extends PIDCommand
 	requires(Robot.drivetrain);
 	Robot.ahrs.reset();
 	Robot.ahrs.zeroYaw();
-	getPIDController().setOutputRange(0.10, 0.60);
+	getPIDController().setOutputRange(0.15, 0.65);
 	getPIDController().setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();
 	double targetHeading = ((double)(Robot.ahrs.getCompassHeading()) + angle) % 360.0;
