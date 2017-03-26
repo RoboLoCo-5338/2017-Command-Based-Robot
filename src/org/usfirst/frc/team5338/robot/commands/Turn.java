@@ -9,11 +9,11 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(0.10, 0.5, 0.10, 0.005);
+	super(0.05, 0.5, 0.05, 0.005);
 	requires(Robot.drivetrain);
-	getPIDController().setPercentTolerance(1.0);
-	getPIDController().setOutputRange(0.0, 0.50);
-	getPIDController().setInputRange(0.0, 360.0);
+	getPIDController().setPercentTolerance(0.5);
+	getPIDController().setOutputRange(0.0, 0.75);
+	setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();
 //	double targetHeading = (Robot.ahrs.getFusedHeading() + angle) % 360;
 //	if(targetHeading < 0)
@@ -24,11 +24,12 @@ public class Turn extends PIDCommand
 //	{
 	    setSetpoint(180.0);
 	//}
-	setTimeout(4);
+	setTimeout(5);
     }
     protected void execute()
     {
 	SmartDashboard.putNumber("HEADING", Robot.ahrs.getFusedHeading());
+	SmartDashboard.putNumber("PID VALUE", getPosition());
     }
     protected boolean isFinished()
     {

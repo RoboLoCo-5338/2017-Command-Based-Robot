@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Winch extends Subsystem
 {
-    private final CANTalon LIFT = new CANTalon(7);
+    private final CANTalon LIFT = new CANTalon(7, 1);
 
     public Winch()
     {
@@ -29,7 +29,7 @@ public class Winch extends Subsystem
 	}
 	else if(oi.get(OI.Button.WINCH))
 	{
-	    LIFT.set(-0.95);
+	    LIFT.set(-0.99);
 	    return;
 	}
 	else

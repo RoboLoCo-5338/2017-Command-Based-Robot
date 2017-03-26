@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem
 {
-    public final CANTalon DRIVEL1 = new CANTalon(4);
-    public final CANTalon DRIVEL2 = new CANTalon(3);
-    public final CANTalon DRIVER1 = new CANTalon(2);
-    public final CANTalon DRIVER2 = new CANTalon(1);
+    public final CANTalon DRIVEL1 = new CANTalon(4, 1);
+    public final CANTalon DRIVEL2 = new CANTalon(3, 1);
+    public final CANTalon DRIVER1 = new CANTalon(2, 1);
+    public final CANTalon DRIVER2 = new CANTalon(1, 1);
 
     public final RobotDrive DRIVE = new RobotDrive(DRIVEL1, DRIVEL2, DRIVER1, DRIVER2);
 
