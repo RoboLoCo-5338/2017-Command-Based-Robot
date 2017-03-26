@@ -24,13 +24,14 @@ public class Turn extends PIDCommand
 	{
 	    setSetpoint(targetHeading);
 	}
+	setTimeout(10);
     }
     protected void execute()
     {
     }
     protected boolean isFinished()
     {
-	return getPIDController().onTarget();
+	return isTimedOut();
     }
     protected void end()
     {
