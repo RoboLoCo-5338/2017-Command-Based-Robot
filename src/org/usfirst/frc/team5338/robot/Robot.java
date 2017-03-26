@@ -51,8 +51,7 @@ public class Robot extends IterativeRobot
 	camera.setWhiteBalanceHoldCurrent();
 	camera.setBrightness(camera.getBrightness());*/
 
-	SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
-	SmartDashboard.putNumber("HEADING", ahrs.getFusedHeading());
+	SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
     }
     @Override
     public void autonomousInit()
