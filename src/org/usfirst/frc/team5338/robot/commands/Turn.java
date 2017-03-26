@@ -8,11 +8,11 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(5, 0.0, 0.0, 0.005);
+	super(20, 0.0, 0.0, 0.005);
 	requires(Robot.drivetrain);
 	Robot.ahrs.reset();
 	Robot.ahrs.zeroYaw();
-	getPIDController().setOutputRange(0.0, 0.25);
+	getPIDController().setOutputRange(0.10, 0.60);
 	getPIDController().setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();
 	double targetHeading = ((double)(Robot.ahrs.getCompassHeading()) + angle) % 360.0;
