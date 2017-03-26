@@ -17,15 +17,15 @@ public class Turn extends PIDCommand
 	getPIDController().setOutputRange(0.0, 0.25);
 	setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();
-//	double targetHeading = (Robot.ahrs.getFusedHeading() + angle) % 360;
-//	if(targetHeading < 0)
-//	{
-//	    setSetpoint(360 + targetHeading);
-//	}
-//	else
-//	{
+	double targetHeading = (Robot.ahrs.getFusedHeading() + angle) % 360.0;
+	if(targetHeading < 0)
+	{
+	    setSetpoint(360.0 + targetHeading);
+	}
+	else
+	{
 	    setSetpoint((double)(Robot.ahrs.getCompassHeading()) + 180.0);
-	//}
+	}
 	setTimeout(5);
     }
     protected void execute()
