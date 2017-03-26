@@ -24,7 +24,7 @@ public class Turn extends PIDCommand
 	{
 	    setSetpoint(targetHeading);
 	}
-	setTimeout(10);
+	setTimeout(5);
     }
     protected void execute()
     {
