@@ -3,6 +3,7 @@ package org.usfirst.frc.team5338.robot.commands;
 import org.usfirst.frc.team5338.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TankDriveWithJoysticks extends Command
 {
@@ -13,6 +14,7 @@ public class TankDriveWithJoysticks extends Command
     @Override
     protected void execute()
     {
+	SmartDashboard.putNumber("CURRENT HEADING", Robot.ahrs.getFusedHeading());
 	Robot.drivetrain.drive(Robot.oi);
     }
     @Override

@@ -15,7 +15,7 @@ public class Turn extends PIDCommand
 	getPIDController().setOutputRange(0.15, 0.65);
 	getPIDController().setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();
-	double targetHeading = ((double)(Robot.ahrs.getCompassHeading()) + angle) % 360.0;
+	double targetHeading = ((double)(Robot.ahrs.getFusedHeading()) + angle) % 360.0;
 	if(targetHeading < 0)
 	{
 	    setSetpoint(360.0 + targetHeading);
@@ -39,7 +39,7 @@ public class Turn extends PIDCommand
     }
     protected double returnPIDInput()
     {
-	return Robot.ahrs.getCompassHeading();
+	return Robot.ahrs.getFusedHeading();
     }
     protected void usePIDOutput(double output)
     {

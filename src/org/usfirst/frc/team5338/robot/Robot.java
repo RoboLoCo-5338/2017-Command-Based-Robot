@@ -78,7 +78,6 @@ public class Robot extends IterativeRobot
     @Override
     public void teleopPeriodic()
     {
-	SmartDashboard.putNumber("HEADING", ahrs.getCompassHeading());
 	Scheduler.getInstance().run();
     }
 }
