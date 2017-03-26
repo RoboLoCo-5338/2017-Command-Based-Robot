@@ -9,7 +9,7 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(1.0, 0.0, 0.0, 0.005);
+	super(1.0, 0.5, 0.3, 0.005);
 	requires(Robot.drivetrain);
 	Robot.ahrs.reset();
 	Robot.ahrs.zeroYaw();
