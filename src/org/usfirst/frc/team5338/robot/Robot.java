@@ -41,6 +41,9 @@ public class Robot extends IterativeRobot
     @Override
     public void robotInit()
     {
+	while(ahrs.isCalibrating())
+	{
+	}
 	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 	camera.setResolution(360, 360);
 	camera.setFPS(60);
@@ -76,7 +79,7 @@ public class Robot extends IterativeRobot
     @Override
     public void teleopPeriodic()
     {
-	SmartDashboard.putNumber("HEADING", ahrs.getFusedHeading());
+	SmartDashboard.putNumber("HEADING", ahrs.getCompassHeading());
 	Scheduler.getInstance().run();
     }
 }

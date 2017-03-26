@@ -11,6 +11,8 @@ public class Turn extends PIDCommand
     {
 	super(0.05, 0.5, 0.05, 0.005);
 	requires(Robot.drivetrain);
+	Robot.ahrs.reset();
+	Robot.ahrs.zeroYaw();
 	getPIDController().setPercentTolerance(0.5);
 	getPIDController().setOutputRange(0.0, 0.75);
 	setInputRange(0.0, 360.0);
@@ -22,13 +24,13 @@ public class Turn extends PIDCommand
 //	}
 //	else
 //	{
-	    setSetpoint(180.0);
+	    setSetpoint((double)(Robot.ahrs.getCompassHeading()) + 180.0);
 	//}
 	setTimeout(5);
     }
     protected void execute()
     {
-	SmartDashboard.putNumber("HEADING", Robot.ahrs.getFusedHeading());
+	SmartDashboard.putNumber("HEADING", Robot.ahrs.getCompassHeading());
 	SmartDashboard.putNumber("PID VALUE", getPosition());
     }
     protected boolean isFinished()
@@ -41,7 +43,7 @@ public class Turn extends PIDCommand
     }
     protected double returnPIDInput()
     {
-	return Robot.ahrs.getFusedHeading();
+	return Robot.ahrs.getCompassHeading();
     }
     protected void usePIDOutput(double output)
     {
