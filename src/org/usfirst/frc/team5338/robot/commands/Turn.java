@@ -9,10 +9,10 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(1.0, 0.5, 0.3, 0.005);
+	super(0.001, 0, 0, 0.005); //anything higher than .005 is essentially the same
 	requires(Robot.drivetrain);
-	Robot.ahrs.reset();
-	Robot.ahrs.zeroYaw();
+//	Robot.ahrs.reset();
+//	Robot.ahrs.zeroYaw(); //these lines cause it to go in a different direction every time.... not sure why
 	getPIDController().setOutputRange(-0.50, 0.50);
 	getPIDController().setInputRange(0.0, 360.0);
 	getPIDController().setContinuous();

@@ -24,60 +24,55 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
-{
-    public static SendableChooser<String> autonomousChooser;
+public class Robot extends IterativeRobot {
+	public static SendableChooser<String> autonomousChooser;
 
-    public static final OI oi = new OI();
-    public static final DriveTrain drivetrain = new DriveTrain();
-    public static final BallHandler ballhandler = new BallHandler();
-    public static final Winch winch = new Winch();
-    public static final GearHandler gearhandler = new GearHandler();
+	public static final OI oi = new OI();
+	public static final DriveTrain drivetrain = new DriveTrain();
+	public static final BallHandler ballhandler = new BallHandler();
+	public static final Winch winch = new Winch();
+	public static final GearHandler gearhandler = new GearHandler();
 
-    private static Command autonomousCommand;
+	private static Command autonomousCommand;
 
-    public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte)(200));;
+	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) (200));;
 
-    @Override
-    public void robotInit()
-    {
-	while(ahrs.isCalibrating())
-	{
+	@Override
+	public void robotInit() {
+		while (ahrs.isCalibrating()) {
+		}
+		/*
+		 * UsbCamera camera =
+		 * CameraServer.getInstance().startAutomaticCapture();
+		 * camera.setResolution(360, 360); camera.setFPS(60);
+		 * camera.setExposureHoldCurrent(); camera.setWhiteBalanceHoldCurrent();
+		 * camera.setBrightness(camera.getBrightness());
+		 */
+
+		SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
 	}
-	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-	camera.setResolution(360, 360);
-	camera.setFPS(60);
-	camera.setExposureHoldCurrent();
-	camera.setWhiteBalanceHoldCurrent();
-	camera.setBrightness(camera.getBrightness());*/
 
-	SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
-    }
-    @Override
-    public void autonomousInit()
-    {
-	autonomousCommand = new Autonomous();
-	autonomousCommand.start(); // schedule the autonomous command (example)
-    }
-    @Override
-    public void autonomousPeriodic()
-    {
-	Scheduler.getInstance().run();
-    }
-    @Override
-    public void teleopInit()
-    {
-	try
-	{
-	    autonomousCommand.cancel();
+	@Override
+	public void autonomousInit() {
+		autonomousCommand = new Autonomous();
+		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
-	catch(Exception e)
-	{
+
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
 	}
-    }
-    @Override
-    public void teleopPeriodic()
-    {
-	Scheduler.getInstance().run();
-    }
+
+	@Override
+	public void teleopInit() {
+		try {
+			autonomousCommand.cancel();
+		} catch (Exception e) {
+		}
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
 }
