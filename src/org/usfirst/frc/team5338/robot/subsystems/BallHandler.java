@@ -29,10 +29,6 @@ public class BallHandler extends Subsystem
 	{
 	    oi.ballState = BallState.OUTTAKE;
 	}
-	else if(oi.get(OI.Button.LOWER_INTAKE))
-	{
-	    oi.ballState = BallState.LOWER_INTAKE;
-	}
 	else if(oi.get(OI.Button.UPPER_INTAKE))
 	{
 	    oi.ballState = BallState.UPPER_INTAKE;
@@ -45,10 +41,6 @@ public class BallHandler extends Subsystem
 	{
 	case OUTTAKE:
 	    TOP.set(0.75);
-	    BOTTOM.set(0.75);
-	    break;
-	case LOWER_INTAKE:
-	    TOP.set(-0.50);
 	    BOTTOM.set(0.75);
 	    break;
 	case UPPER_INTAKE:

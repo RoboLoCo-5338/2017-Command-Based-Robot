@@ -4,7 +4,7 @@ import org.usfirst.frc.team5338.robot.commands.Autonomous;
 import org.usfirst.frc.team5338.robot.subsystems.BallHandler;
 import org.usfirst.frc.team5338.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5338.robot.subsystems.GearHandler;
-import org.usfirst.frc.team5338.robot.subsystems.Winch;
+import org.usfirst.frc.team5338.robot.subsystems.Wincher;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static final OI oi = new OI();
 	public static final DriveTrain drivetrain = new DriveTrain();
 	public static final BallHandler ballhandler = new BallHandler();
-	public static final Winch winch = new Winch();
+	public static final Wincher winch = new Wincher();
 	public static final GearHandler gearhandler = new GearHandler();
 
 	private static Command autonomousCommand;

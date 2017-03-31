@@ -7,11 +7,11 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Winch extends Subsystem
+public class Wincher extends Subsystem
 {
     private final CANTalon LIFT = new CANTalon(7, 1);
 
-    public Winch()
+    public Wincher()
     {
 	super();
 	LIFT.enable();

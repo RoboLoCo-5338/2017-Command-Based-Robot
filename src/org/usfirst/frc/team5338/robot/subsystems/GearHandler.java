@@ -24,7 +24,7 @@ public class GearHandler extends Subsystem
     }
     public void handleGears(OI oi)
     {
-	if(oi.get(OI.Button.GEAR))
+	if(oi.get(OI.Button.GEAR_DEPOSIT))
 	{
 	    DOOR.set(DoubleSolenoid.Value.kReverse);
 	}

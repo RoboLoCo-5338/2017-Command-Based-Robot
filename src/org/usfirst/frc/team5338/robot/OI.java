@@ -10,13 +10,13 @@ public class OI
     public DriveState driveState;
     public enum Button
     {
-	OFF, LOWER_INTAKE, UPPER_INTAKE, OUTTAKE,
-	SLOW, STRAIGHT, REVERSE, FORWARD,
-	GEAR, WINCH
+	OFF, UPPER_INTAKE, OUTTAKE, SLOW, 
+	STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT,
+	WINCH, GEAR_PICK
     }
     public enum BallState
     {
-	OFF, UPPER_INTAKE, LOWER_INTAKE, OUTTAKE
+	OFF, UPPER_INTAKE, OUTTAKE
     }
     public enum DriveState
     {
@@ -44,8 +44,6 @@ public class OI
 	{
 	case OFF:
 	    return joyR.getRawButton(5);
-	case LOWER_INTAKE:
-	    return joyR.getRawButton(4);
 	case UPPER_INTAKE:
 	    return joyR.getRawButton(6);
 	case OUTTAKE:
@@ -58,7 +56,7 @@ public class OI
 	    return joyL.getRawButton(2);
 	case FORWARD:
 	    return joyR.getRawButton(2);
-	case GEAR:
+	case GEAR_DEPOSIT:
 	    return joyL.getRawButton(5);
 	case WINCH:
 	    return joyL.getRawButton(6);
