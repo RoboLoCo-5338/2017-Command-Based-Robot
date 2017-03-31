@@ -35,11 +35,13 @@ public class Robot extends IterativeRobot {
 
 	private static Command autonomousCommand;
 
-	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) (200));;
+	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) (200));
 
 	@Override
-	public void robotInit() {
-		while (ahrs.isCalibrating()) {
+	public void robotInit()
+	{
+		while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated())
+		{
 		}
 		/*
 		 * UsbCamera camera =

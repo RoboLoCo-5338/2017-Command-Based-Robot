@@ -9,27 +9,30 @@ public class Turn extends PIDCommand
 {
     public Turn(int angle)
     {
-	super(0.001, 0, 0, 0.005); //anything higher than .005 is essentially the same
+	//super(0.001*.2, .64/2, .64/3, 0.01); //anything higher than .005 is essentially the same
+    super(0.0057, 0.0000120, 0, 0.005);
 	requires(Robot.drivetrain);
-//	Robot.ahrs.reset();
-//	Robot.ahrs.zeroYaw(); //these lines cause it to go in a different direction every time.... not sure why
-	getPIDController().setOutputRange(-0.50, 0.50);
-	getPIDController().setInputRange(0.0, 360.0);
+	getPIDController().setOutputRange(-0.425, 0.425);
+	getPIDController().setInputRange(-180.0, 180.0);
 	getPIDController().setContinuous();
-	double targetHeading = ((double)(Robot.ahrs.getFusedHeading()) + angle) % 360.0;
-	if(targetHeading < 0)
+	double targetHeading = ((double)(-Robot.ahrs.getYaw()) + angle);
+	if(targetHeading < -180)
 	{
-	    setSetpoint(360.0 + targetHeading);
+	    setSetpoint(180.0 + targetHeading % 180);
+	}
+	else if(targetHeading > 180)
+	{
+	    setSetpoint(-180 + targetHeading % 180);
 	}
 	else
 	{
-	    setSetpoint(targetHeading);
+		setSetpoint(targetHeading);
 	}
-	setTimeout(10);
+	setTimeout(5);
     }
     protected void execute()
     {
-	SmartDashboard.putNumber("CURRENT HEADING", Robot.ahrs.getFusedHeading());
+	SmartDashboard.putNumber("CURRENT HEADING", Robot.ahrs.getYaw());
     }
     protected boolean isFinished()
     {
@@ -41,7 +44,7 @@ public class Turn extends PIDCommand
     }
     protected double returnPIDInput()
     {
-	return Robot.ahrs.getFusedHeading();
+	return -Robot.ahrs.getYaw();
     }
     protected void usePIDOutput(double output)
     {
