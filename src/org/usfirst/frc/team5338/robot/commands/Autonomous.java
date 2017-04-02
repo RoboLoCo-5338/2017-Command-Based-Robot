@@ -3,15 +3,12 @@ package org.usfirst.frc.team5338.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Autonomous extends CommandGroup
-{
-    public Autonomous()
-    {
-	switch(SmartDashboard.getString("AUTONOMOUS CHOICE", "NO CHOICE MADE"))
-	{
+public class Autonomous extends CommandGroup {
+    public Autonomous() {
+	switch (SmartDashboard.getString("AUTONOMOUS CHOICE", "NO CHOICE MADE")) {
 	case "CENTERGEAR":
 	    addSequential(new MoveSlowly(4));
-	    addSequential(new DepositGear());		
+	    addSequential(new DepositGear());
 	    break;
 	case "CENTERGEAR-LEFT":
 	    addSequential(new MoveSlowly(4));
@@ -52,7 +49,7 @@ public class Autonomous extends CommandGroup
 	    addSequential(new MoveFast(4));
 	    break;
 	case "TEST":
-	   // addSequential(new MoveSlowly(1));
+	    // addSequential(new MoveSlowly(1));
 	    addSequential(new Turn(60));
 	    break;
 	default:
