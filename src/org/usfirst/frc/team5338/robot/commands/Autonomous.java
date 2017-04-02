@@ -10,47 +10,25 @@ public class Autonomous extends CommandGroup {
 	    addSequential(new MoveSlowly(4));
 	    addSequential(new DepositGear());
 	    break;
-	case "CENTERGEAR-LEFT":
-	    addSequential(new MoveSlowly(4));
-	    addSequential(new DepositGear());
-	    addSequential(new Turn(-90));
-	    addSequential(new MoveFast(1));
-	    addSequential(new Turn(100));
-	    addSequential(new MoveFast(3));
-	    break;
-	case "CENTERGEAR-RIGHT":
-	    addSequential(new MoveSlowly(4));
-	    addSequential(new DepositGear());
-	    addSequential(new MoveSlowly(-1));
-	    addSequential(new Turn(100));
-	    addSequential(new MoveFast(1));
-	    addSequential(new Turn(-100));
-	    addSequential(new MoveFast(3));
-	    break;
 	case "LEFTGEAR":
 	    addSequential(new MoveSlowly(3));
 	    addSequential(new Turn(60));
 	    addSequential(new MoveSlowly(4));
 	    addSequential(new DepositGear());
-	    addSequential(new MoveSlowly(-1));
-	    addSequential(new Turn(-60));
-	    addSequential(new MoveFast(3));
 	    break;
 	case "RIGHTGEAR":
 	    addSequential(new MoveSlowly(3));
 	    addSequential(new Turn(-60));
 	    addSequential(new MoveSlowly(4));
 	    addSequential(new DepositGear());
-	    addSequential(new MoveSlowly(-1));
-	    addSequential(new Turn(60));
-	    addSequential(new MoveFast(3));
 	    break;
 	case "BASELINE":
 	    addSequential(new MoveFast(4));
 	    break;
 	case "TEST":
-	    // addSequential(new MoveSlowly(1));
 	    addSequential(new Turn(60));
+	    addSequential(new MoveSlowly(1));
+	    addSequential(new Turn(-60));
 	    break;
 	default:
 	    break;

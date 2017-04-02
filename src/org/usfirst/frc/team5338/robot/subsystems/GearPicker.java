@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5338.robot.subsystems;
 
 import org.usfirst.frc.team5338.robot.OI;
-import org.usfirst.frc.team5338.robot.OI.GearLiftState;
 import org.usfirst.frc.team5338.robot.OI.GearMotorState;
 import org.usfirst.frc.team5338.robot.commands.PickGears;
 
@@ -32,24 +31,16 @@ public class GearPicker extends Subsystem {
 	    oi.gearMotorState = GearMotorState.HOLD;
 	}
 	if (oi.get(OI.Button.POV)) {
-	    oi.gearLiftState = GearLiftState.RAISED;
-	} else {
-	    oi.gearLiftState = GearLiftState.LOWERED;
-	}
-	switch (oi.gearLiftState) {
-	case RAISED:
 	    LIFT.set(DoubleSolenoid.Value.kReverse);
-	    break;
-	case LOWERED:
-	    LIFT.set(DoubleSolenoid.Value.kForward);
-	    break;
+	} else {
+	    LIFT.set(DoubleSolenoid.Value.kForward);;
 	}
 	switch (oi.gearMotorState) {
 	case HOLD:
 	    INTAKE.set(0.25);
-	    Timer.delay(0.50);
+	    Timer.delay(0.25);
 	    INTAKE.set(0.0);
-	    Timer.delay(3.0);
+	    Timer.delay(1.75);
 	    break;
 	case INTAKE:
 	    INTAKE.set(0.99);

@@ -8,7 +8,6 @@ public class OI {
     public BallState ballState;
     public DriveState driveState;
     public GearMotorState gearMotorState;
-    public GearLiftState gearLiftState;
 
     public enum Button {
 	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, POV, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
@@ -22,9 +21,6 @@ public class OI {
 	HOLD, INTAKE, OUTTAKE
     }
 
-    public enum GearLiftState {
-	LOWERED, RAISED
-    }
 
     public enum DriveState {
 	REVERSE, FORWARD

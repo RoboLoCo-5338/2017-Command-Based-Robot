@@ -9,6 +9,8 @@ import org.usfirst.frc.team5338.robot.subsystems.Wincher;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,13 +43,13 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 	while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated()) {
 	}
-	/*
-	 * UsbCamera camera =
-	 * CameraServer.getInstance().startAutomaticCapture();
-	 * camera.setResolution(360, 360); camera.setFPS(60);
-	 * camera.setExposureHoldCurrent(); camera.setWhiteBalanceHoldCurrent();
-	 * camera.setBrightness(camera.getBrightness());
-	 */
+
+	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+	camera.setResolution(360, 360);
+	camera.setFPS(60);
+	camera.setExposureHoldCurrent();
+	camera.setWhiteBalanceHoldCurrent();
+	camera.setBrightness(camera.getBrightness());
 
 	SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
     }
