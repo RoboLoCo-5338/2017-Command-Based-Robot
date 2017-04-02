@@ -8,37 +8,29 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class BallHandler extends Subsystem
-{
+public class BallHandler extends Subsystem {
     private final CANTalon BOTTOM = new CANTalon(5, 1);
     private final CANTalon TOP = new CANTalon(6, 1);
 
-    public BallHandler()
-    {
+    public BallHandler() {
 	super();
 	TOP.enable();
 	BOTTOM.enable();
     }
-    public void initDefaultCommand() 
-    {
+
+    public void initDefaultCommand() {
 	setDefaultCommand(new HandleBalls());
     }
-    public void handleBalls(OI oi)
-    {
-	if(oi.get(OI.Button.OUTTAKE))
-	{
+
+    public void handleBalls(OI oi) {
+	if (oi.get(OI.Button.OUTTAKE)) {
 	    oi.ballState = BallState.OUTTAKE;
-	}
-	else if(oi.get(OI.Button.UPPER_INTAKE))
-	{
+	} else if (oi.get(OI.Button.UPPER_INTAKE)) {
 	    oi.ballState = BallState.UPPER_INTAKE;
-	}
-	else if(oi.get(OI.Button.OFF))
-	{
+	} else if (oi.get(OI.Button.OFF)) {
 	    oi.ballState = BallState.OFF;
 	}
-	switch(oi.ballState)
-	{
+	switch (oi.ballState) {
 	case OUTTAKE:
 	    TOP.set(0.75);
 	    BOTTOM.set(0.75);
@@ -51,8 +43,8 @@ public class BallHandler extends Subsystem
 	    stopBalls();
 	}
     }
-    public void stopBalls()
-    {
+
+    public void stopBalls() {
 	TOP.set(0.0);
 	BOTTOM.set(0.0);
     }

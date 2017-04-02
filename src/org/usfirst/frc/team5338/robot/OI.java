@@ -2,46 +2,50 @@ package org.usfirst.frc.team5338.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class OI
-{
+public class OI {
     private final Joystick joyL = new Joystick(0);
     private final Joystick joyR = new Joystick(1);
     public BallState ballState;
     public DriveState driveState;
-    public enum Button
-    {
-	OFF, UPPER_INTAKE, OUTTAKE, SLOW, 
-	STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT,
-	WINCH, GEAR_PICK
+    public GearMotorState gearMotorState;
+    public GearLiftState gearLiftState;
+
+    public enum Button {
+	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, POV, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
     }
-    public enum BallState
-    {
+
+    public enum BallState {
 	OFF, UPPER_INTAKE, OUTTAKE
     }
-    public enum DriveState
-    {
+
+    public enum GearMotorState {
+	HOLD, INTAKE, OUTTAKE
+    }
+
+    public enum GearLiftState {
+	LOWERED, RAISED
+    }
+
+    public enum DriveState {
 	REVERSE, FORWARD
     }
 
-    public OI()
-    {
+    public OI() {
 	ballState = BallState.OFF;
 	driveState = DriveState.REVERSE;
     }
 
-    public Joystick getJoystick(int n)
-    {
-	if(n == 0)
+    public Joystick getJoystick(int n) {
+	if (n == 0)
 	    return joyL;
-	else if(n == 1)
+	else if (n == 1)
 	    return joyR;
 	else
 	    return null;
     }
-    public boolean get(Button button)
-    {
-	switch(button)
-	{
+
+    public boolean get(Button button) {
+	switch (button) {
 	case OFF:
 	    return joyR.getRawButton(5);
 	case UPPER_INTAKE:
@@ -60,28 +64,31 @@ public class OI
 	    return joyL.getRawButton(5);
 	case WINCH:
 	    return joyL.getRawButton(6);
+	case POV:
+	    return joyL.getPOV(0) != -1;
+	case GEAR_PICK_INTAKE:
+	    return joyL.getRawButton(3);
+	case GEAR_PICK_OUTTAKE:
+	    return joyL.getRawButton(4);
 	default:
 	    return false;
 	}
     }
-    private double joystickDeadZone(double value)
-    {
-	if (value > 0.05)
-	{
-	    return (value - 0.05)/0.95;
-	}
-	else if (value < -0.05)
-	{
-	    return (value + 0.05)/0.95;
+
+    private double joystickDeadZone(double value) {
+	if (value > 0.05) {
+	    return (value - 0.05) / 0.95;
+	} else if (value < -0.05) {
+	    return (value + 0.05) / 0.95;
 	}
 	return value;
     }
-    public double getLeft()
-    {
+
+    public double getLeft() {
 	return joystickDeadZone(joyL.getRawAxis(1));
     }
-    public double getRight()
-    {
+
+    public double getRight() {
 	return joystickDeadZone(joyR.getRawAxis(1));
     }
 }

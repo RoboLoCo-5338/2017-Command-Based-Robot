@@ -9,8 +9,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class DriveTrain extends Subsystem
-{
+public class DriveTrain extends Subsystem {
     public final CANTalon DRIVEL1 = new CANTalon(4, 1);
     public final CANTalon DRIVEL2 = new CANTalon(3, 1);
     public final CANTalon DRIVER1 = new CANTalon(2, 1);
@@ -20,54 +19,40 @@ public class DriveTrain extends Subsystem
 
     private double throttle = 1.0;
 
-    public DriveTrain()
-    {
+    public DriveTrain() {
 	super();
     }
+
     @Override
-    public void initDefaultCommand()
-    {
+    public void initDefaultCommand() {
 	setDefaultCommand(new TankDriveWithJoysticks());
     }
-    public void drive(OI oi)
-    {
-	if(oi.get(OI.Button.REVERSE))
-	{
+
+    public void drive(OI oi) {
+	if (oi.get(OI.Button.REVERSE)) {
 	    oi.driveState = DriveState.REVERSE;
-	}
-	else if(oi.get(OI.Button.FORWARD))
-	{
+	} else if (oi.get(OI.Button.FORWARD)) {
 	    oi.driveState = DriveState.FORWARD;
 	}
 
-	if(oi.get(OI.Button.SLOW))
-	{	
+	if (oi.get(OI.Button.SLOW)) {
 	    throttle = 0.5;
-	}
-	else
-	{
+	} else {
 	    throttle = 1.0;
 	}
 
-	switch(oi.driveState)
-	{
+	switch (oi.driveState) {
 	case REVERSE:
-	    if(oi.get(OI.Button.STRAIGHT))
-	    {
+	    if (oi.get(OI.Button.STRAIGHT)) {
 		DRIVE.tankDrive(oi.getLeft(), oi.getLeft(), false);
-	    }
-	    else
-	    {
+	    } else {
 		DRIVE.tankDrive(throttle * oi.getRight(), throttle * oi.getLeft(), false);
 	    }
 	    break;
 	case FORWARD:
-	    if(oi.get(OI.Button.STRAIGHT))
-	    {
+	    if (oi.get(OI.Button.STRAIGHT)) {
 		DRIVE.tankDrive(-oi.getLeft(), -oi.getLeft(), false);
-	    }
-	    else
-	    {
+	    } else {
 		DRIVE.tankDrive(-throttle * oi.getLeft(), -throttle * oi.getRight(), false);
 	    }
 	    break;
@@ -76,8 +61,8 @@ public class DriveTrain extends Subsystem
 	    break;
 	}
     }
-    public void drive(double left, double right)
-    {
+
+    public void drive(double left, double right) {
 	DRIVE.tankDrive(throttle * left, throttle * right, false);
     }
 }

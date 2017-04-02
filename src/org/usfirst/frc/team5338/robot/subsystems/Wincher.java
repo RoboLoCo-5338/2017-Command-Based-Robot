@@ -7,38 +7,31 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Wincher extends Subsystem
-{
+public class Wincher extends Subsystem {
     private final CANTalon LIFT = new CANTalon(7, 1);
 
-    public Wincher()
-    {
+    public Wincher() {
 	super();
 	LIFT.enable();
     }
-    public void initDefaultCommand() 
-    {
+
+    public void initDefaultCommand() {
 	setDefaultCommand(new LiftRobot());
     }
-    public void liftRobot(OI oi)
-    {
-	if(oi.get(OI.Button.WINCH) && oi.get(OI.Button.SLOW))
-	{
+
+    public void liftRobot(OI oi) {
+	if (oi.get(OI.Button.WINCH) && oi.get(OI.Button.SLOW)) {
 	    LIFT.set(-0.25);
 	    return;
-	}
-	else if(oi.get(OI.Button.WINCH))
-	{
+	} else if (oi.get(OI.Button.WINCH)) {
 	    LIFT.set(-0.99);
 	    return;
-	}
-	else
-	{
+	} else {
 	    stopLift();
 	}
     }
-    public void stopLift()
-    {
+
+    public void stopLift() {
 	LIFT.set(0.0);
     }
 }
