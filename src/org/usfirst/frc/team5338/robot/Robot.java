@@ -26,55 +26,47 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    public static SendableChooser<String> autonomousChooser;
+	public static SendableChooser<String> autonomousChooser;
 
-    public static final OI oi = new OI();
-    public static final DriveTrain drivetrain = new DriveTrain();
-    public static final BallHandler ballhandler = new BallHandler();
-    public static final Wincher wincher = new Wincher();
-    public static final GearHandler gearhandler = new GearHandler();
-    public static final GearPicker gearpicker = new GearPicker();
+	public static final OI oi = new OI();
+	public static final DriveTrain drivetrain = new DriveTrain();
+	public static final BallHandler ballhandler = new BallHandler();
+	public static final Wincher wincher = new Wincher();
+	public static final GearHandler gearhandler = new GearHandler();
+	public static final GearPicker gearpicker = new GearPicker();
 
-    private static Command autonomousCommand;
+	private static Command autonomousCommand;
 
-    public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) (200));
+	public static final AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) (200));
 
-    @Override
-    public void robotInit() {
-	while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated()) {
+	@Override
+	public void robotInit() {
+		while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated()) {
+		}
+
 	}
 
-//	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-//	camera.setResolution(360, 360);
-//	camera.setFPS(60);
-//	camera.setExposureHoldCurrent();
-//	camera.setWhiteBalanceHoldCurrent();
-//	camera.setBrightness(camera.getBrightness());
-//
-	SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
-    }
-
-    @Override
-    public void autonomousInit() {
-	autonomousCommand = new Autonomous();
-	autonomousCommand.start(); // schedule the autonomous command (example)
-    }
-
-    @Override
-    public void autonomousPeriodic() {
-	Scheduler.getInstance().run();
-    }
-
-    @Override
-    public void teleopInit() {
-	try {
-	    autonomousCommand.cancel();
-	} catch (Exception e) {
+	@Override
+	public void autonomousInit() {
+		autonomousCommand = new Autonomous();
+		autonomousCommand.start(); // schedule the autonomous command (example)
 	}
-    }
 
-    @Override
-    public void teleopPeriodic() {
-	Scheduler.getInstance().run();
-    }
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void teleopInit() {
+		try {
+			autonomousCommand.cancel();
+		} catch (Exception e) {
+		}
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
 }

@@ -60,12 +60,10 @@ public class OI {
 	    return joyL.getRawButton(5);
 	case WINCH:
 	    return joyL.getRawButton(6);
-	case POV:
-	    return joyL.getPOV(0) != -1;
 	case GEAR_PICK_INTAKE:
-	    return joyL.getRawButton(3);
-	case GEAR_PICK_OUTTAKE:
 	    return joyL.getRawButton(4);
+	case GEAR_PICK_OUTTAKE:
+	    return joyL.getRawButton(3);
 	default:
 	    return false;
 	}

@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearPicker extends Subsystem {
-    private final DoubleSolenoid LIFT = new DoubleSolenoid(3, 4);
-    private final CANTalon INTAKE = new CANTalon(8, 1);
+    private final DoubleSolenoid LIFT = new DoubleSolenoid(7, 6);
+    private final CANTalon INTAKE = new CANTalon(8);
 
     public GearPicker() {
 	super();
@@ -24,28 +24,27 @@ public class GearPicker extends Subsystem {
     public void pickGears(OI oi) {
 	if (oi.get(OI.Button.GEAR_PICK_INTAKE)) {
 	    oi.gearMotorState = GearMotorState.INTAKE;
+	    LIFT.set(DoubleSolenoid.Value.kReverse);
+
 	} else if (oi.get(OI.Button.GEAR_PICK_OUTTAKE)) {
 	    oi.gearMotorState = GearMotorState.OUTTAKE;
+	    LIFT.set(DoubleSolenoid.Value.kReverse);
+
 	} else {
 	    oi.gearMotorState = GearMotorState.HOLD;
+	    LIFT.set(DoubleSolenoid.Value.kForward);
+
 	}
-	if (oi.get(OI.Button.POV)) {
-	    LIFT.set(DoubleSolenoid.Value.kReverse);
-	} else {
-	    LIFT.set(DoubleSolenoid.Value.kForward);;
-	}
+	
 	switch (oi.gearMotorState) {
 	case HOLD:
-	    INTAKE.set(0.05);
-//	    Timer.delay(0.25);
-//	    INTAKE.set(0.0);
-//	    Timer.delay(1.75);
+	    INTAKE.set(-0.05);
 	    break;
 	case INTAKE:
-	    INTAKE.set(0.99);
+	    INTAKE.set(-0.5);
 	    break;
 	case OUTTAKE:
-	    INTAKE.set(-0.99);
+	    INTAKE.set(1);
 	    break;
 	default:
 	    stopGears();

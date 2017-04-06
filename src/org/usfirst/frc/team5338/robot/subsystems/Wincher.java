@@ -8,7 +8,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Wincher extends Subsystem {
-    private final CANTalon LIFT = new CANTalon(7, 1);
+    private final CANTalon LIFT = new CANTalon(7);
 
     public Wincher() {
 	super();
