@@ -44,13 +44,13 @@ public class Robot extends IterativeRobot {
 	while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated()) {
 	}
 
-	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-	camera.setResolution(360, 360);
-	camera.setFPS(60);
-	camera.setExposureHoldCurrent();
-	camera.setWhiteBalanceHoldCurrent();
-	camera.setBrightness(camera.getBrightness());
-
+//	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+//	camera.setResolution(360, 360);
+//	camera.setFPS(60);
+//	camera.setExposureHoldCurrent();
+//	camera.setWhiteBalanceHoldCurrent();
+//	camera.setBrightness(camera.getBrightness());
+//
 	SmartDashboard.putString("AUTONOMOUS CHOICE", "TEST");
     }
 
