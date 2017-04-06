@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearPicker extends Subsystem {
     private final DoubleSolenoid LIFT = new DoubleSolenoid(3, 4);
-    private final CANTalon INTAKE = new CANTalon(8, 1);
+    private final CANTalon INTAKE = new CANTalon(8);
 
     public GearPicker() {
 	super();

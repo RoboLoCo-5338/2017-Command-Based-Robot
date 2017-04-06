@@ -9,8 +9,8 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BallHandler extends Subsystem {
-    private final CANTalon BOTTOM = new CANTalon(5, 1);
-    private final CANTalon TOP = new CANTalon(6, 1);
+    private final CANTalon BOTTOM = new CANTalon(5);
+    private final CANTalon TOP = new CANTalon(6);
 
     public BallHandler() {
 	super();
