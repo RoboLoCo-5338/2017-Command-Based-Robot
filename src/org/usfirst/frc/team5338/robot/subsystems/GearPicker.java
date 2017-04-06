@@ -7,7 +7,6 @@ import org.usfirst.frc.team5338.robot.commands.PickGears;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearPicker extends Subsystem {
@@ -37,10 +36,10 @@ public class GearPicker extends Subsystem {
 	}
 	switch (oi.gearMotorState) {
 	case HOLD:
-	    INTAKE.set(0.25);
-	    Timer.delay(0.25);
-	    INTAKE.set(0.0);
-	    Timer.delay(1.75);
+//	    INTAKE.set(0.25);
+//	    Timer.delay(0.25);
+//	    INTAKE.set(0.0);
+//	    Timer.delay(1.75);
 	    break;
 	case INTAKE:
 	    INTAKE.set(0.99);

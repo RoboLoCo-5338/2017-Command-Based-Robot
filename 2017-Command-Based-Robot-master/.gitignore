@@ -1,6 +1,0 @@
-.DS_Store
-/dist/*
-/bin/*
-/build/*
-.jar
-.class
