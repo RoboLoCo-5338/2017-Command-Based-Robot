@@ -37,9 +37,6 @@ public class GearPicker extends Subsystem {
 	switch (oi.gearMotorState) {
 	case HOLD:
 	    INTAKE.set(0.05);
-//	    Timer.delay(0.25);
-//	    INTAKE.set(0.0);
-//	    Timer.delay(1.75);
 	    break;
 	case INTAKE:
 	    INTAKE.set(0.99);
