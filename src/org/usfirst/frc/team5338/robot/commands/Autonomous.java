@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Autonomous extends CommandGroup {
     public Autonomous() {
-	switch (SmartDashboard.getString("AUTONOMOUS CHOICE", "NO CHOICE MADE")) {
+	switch (SmartDashboard.getString("AUTONOMOUS CHOICE", "CENTERGEAR")) {
 	case "CENTERGEAR":
 	    addSequential(new MoveSlowly(4));
 	    addSequential(new DepositGear());
@@ -25,6 +25,11 @@ public class Autonomous extends CommandGroup {
 	case "BASELINE":
 	    addSequential(new MoveFast(4));
 	    break;
+	case "BALLDEPOSIT":
+		addSequential(new MoveSlowly(1));
+		addSequential(new TurnHardCode(1));
+		addSequential(new MoveSlowly(-4));
+		addSequential(new DepositBalls());
 	case "TEST":
 	    addSequential(new Turn(60));
 	    addSequential(new MoveSlowly(1));

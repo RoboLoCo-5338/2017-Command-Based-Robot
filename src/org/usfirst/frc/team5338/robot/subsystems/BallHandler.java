@@ -48,4 +48,10 @@ public class BallHandler extends Subsystem {
 	TOP.set(0.0);
 	BOTTOM.set(0.0);
     }
+    
+    public void setBalls(double top, double bottom)
+    {
+    	TOP.set(top);
+    	BOTTOM.set(bottom);
+    }
 }

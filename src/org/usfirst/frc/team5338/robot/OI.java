@@ -7,20 +7,14 @@ public class OI {
     private final Joystick joyR = new Joystick(1);
     public BallState ballState;
     public DriveState driveState;
-    public GearMotorState gearMotorState;
 
     public enum Button {
-	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, POV, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
+	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
     }
 
     public enum BallState {
 	OFF, UPPER_INTAKE, OUTTAKE
     }
-
-    public enum GearMotorState {
-	HOLD, INTAKE, OUTTAKE
-    }
-
 
     public enum DriveState {
 	REVERSE, FORWARD

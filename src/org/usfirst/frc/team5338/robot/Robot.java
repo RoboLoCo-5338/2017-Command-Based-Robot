@@ -9,8 +9,6 @@ import org.usfirst.frc.team5338.robot.subsystems.Wincher;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;

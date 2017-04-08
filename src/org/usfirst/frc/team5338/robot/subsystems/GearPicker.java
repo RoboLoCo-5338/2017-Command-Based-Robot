@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5338.robot.subsystems;
 
 import org.usfirst.frc.team5338.robot.OI;
-import org.usfirst.frc.team5338.robot.OI.GearMotorState;
 import org.usfirst.frc.team5338.robot.commands.PickGears;
 
 import com.ctre.CANTalon;
@@ -23,31 +22,16 @@ public class GearPicker extends Subsystem {
 
     public void pickGears(OI oi) {
 	if (oi.get(OI.Button.GEAR_PICK_INTAKE)) {
-	    oi.gearMotorState = GearMotorState.INTAKE;
+		INTAKE.set(-0.5);
 	    LIFT.set(DoubleSolenoid.Value.kReverse);
 
 	} else if (oi.get(OI.Button.GEAR_PICK_OUTTAKE)) {
-	    oi.gearMotorState = GearMotorState.OUTTAKE;
+		INTAKE.set(0.99);;
 	    LIFT.set(DoubleSolenoid.Value.kReverse);
 
 	} else {
-	    oi.gearMotorState = GearMotorState.HOLD;
+		INTAKE.set(-0.05);
 	    LIFT.set(DoubleSolenoid.Value.kForward);
-
-	}
-	
-	switch (oi.gearMotorState) {
-	case HOLD:
-	    INTAKE.set(-0.05);
-	    break;
-	case INTAKE:
-	    INTAKE.set(-0.5);
-	    break;
-	case OUTTAKE:
-	    INTAKE.set(1);
-	    break;
-	default:
-	    stopGears();
 	}
     }
 
