@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		while (ahrs.isCalibrating() || ahrs.isMagnetometerCalibrated()) {
 		}
-		SmartDashboard.putString("AUTONOMOUS CHOICE", "NO CHOICE MADE");
+		SmartDashboard.putString("AUTONOMOUS CHOICE", "CENTERGEAR");
 	}
 
 	@Override
