@@ -41,6 +41,13 @@ public class DriveTrain extends Subsystem {
 	    throttle = 1.0;
 	}
 
+	if(oi.get(OI.Button.KID_MODE_ON))
+		OI.kidMode = true;
+	if(oi.get(OI.Button.KID_MODE_OFF))
+		OI.kidMode = false;
+	
+	
+	
 	switch (oi.driveState) {
 	case REVERSE:
 	    if (oi.get(OI.Button.STRAIGHT)) {

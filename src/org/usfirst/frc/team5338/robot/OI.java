@@ -7,9 +7,10 @@ public class OI {
     private final Joystick joyR = new Joystick(1);
     public BallState ballState;
     public DriveState driveState;
+    static public boolean kidMode = false;
 
     public enum Button {
-	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
+	OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE, KID_MODE_ON, KID_MODE_OFF
     }
 
     public enum BallState {
@@ -37,27 +38,47 @@ public class OI {
     public boolean get(Button button) {
 	switch (button) {
 	case OFF:
+		if (kidMode) return false;
+		
 	    return joyR.getRawButton(5);
 	case UPPER_INTAKE:
+		if (kidMode) return false;
+
 	    return joyR.getRawButton(6);
 	case OUTTAKE:
+		if (kidMode) return false;
+
 	    return joyR.getRawButton(3);
 	case SLOW:
+		if (kidMode) return false;
+
 	    return joyR.getRawButton(1);
 	case STRAIGHT:
+		if (kidMode) return false;
+
 	    return joyL.getRawButton(1);
 	case REVERSE:
+		if (kidMode) return false;
+
 	    return joyL.getRawButton(2);
 	case FORWARD:
+		if (kidMode) return false;
+
 	    return joyR.getRawButton(2);
 	case GEAR_DEPOSIT:
 	    return joyL.getRawButton(5);
 	case WINCH:
+		if (kidMode) return false;
+
 	    return joyL.getRawButton(6);
 	case GEAR_PICK_INTAKE:
 	    return joyL.getRawButton(4);
 	case GEAR_PICK_OUTTAKE:
 	    return joyL.getRawButton(3);
+	case KID_MODE_ON:
+	    return joyR.getRawButton(7);
+	case KID_MODE_OFF:
+	    return joyR.getRawButton(8);
 	default:
 	    return false;
 	}
@@ -73,10 +94,28 @@ public class OI {
     }
 
     public double getLeft() {
-	return joystickDeadZone(joyL.getRawAxis(1));
+	double a = joystickDeadZone(joyL.getRawAxis(1));
+	if(kidMode) 
+		if(a<-.3)
+			return -.3;
+		else if (a>.3)
+			return .3;
+		else
+			return a;
+	else
+		return a;
     }
 
     public double getRight() {
-	return joystickDeadZone(joyR.getRawAxis(1));
+	double a= joystickDeadZone(joyR.getRawAxis(1));
+	if(kidMode) 
+		if(a<-.3)
+			return -.3;
+		else if (a>.3)
+			return .3;
+		else
+			return a;
+	else
+		return a;
     }
 }

@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Turn extends PIDCommand {
     public Turn(int angle) {
-	// super(0.001*.2, .64/2, .64/3, 0.01); //anything higher than .005 is
-	// essentially the same
-	super(0.0057, 0.0000120, 0, 0.005);
+	super(0.0056, 0.0000120, 0, 0.005);
 	requires(Robot.drivetrain);
 	getPIDController().setOutputRange(-0.425, 0.425);
 	getPIDController().setInputRange(-180.0, 180.0);
@@ -22,7 +20,7 @@ public class Turn extends PIDCommand {
 	} else {
 	    setSetpoint(targetHeading);
 	}
-	setTimeout(5);
+	setTimeout(4);
     }
 
     protected void execute() {

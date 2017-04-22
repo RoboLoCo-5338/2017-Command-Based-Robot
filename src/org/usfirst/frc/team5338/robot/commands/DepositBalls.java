@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DepositBalls extends Command {
     public DepositBalls() {
 	requires(Robot.ballhandler);
-	setTimeout(4);
+	setTimeout(3);
     }
 
     protected void execute() {
