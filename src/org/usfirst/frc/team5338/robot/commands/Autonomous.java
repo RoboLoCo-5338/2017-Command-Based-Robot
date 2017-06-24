@@ -27,7 +27,7 @@ public class Autonomous extends CommandGroup {
 	    break;
 	case "BALLDEPOSIT":
 		addSequential(new MoveSlowly(1));
-		addSequential(new TurnHardCode(1));
+		addSequential(new Turn(90));
 		addSequential(new MoveSlowly(-4));
 		addSequential(new DepositBalls());
 	case "TEST":
