@@ -17,7 +17,7 @@ public class DriveTrain extends Subsystem {
 
     public final RobotDrive DRIVE = new RobotDrive(DRIVEL1, DRIVEL2, DRIVER1, DRIVER2);
 
-    private double throttle = 1.0;
+    private double throttle = 0.5;
 
     public DriveTrain() {
 	super();
@@ -36,29 +36,22 @@ public class DriveTrain extends Subsystem {
 	}
 
 	if (oi.get(OI.Button.SLOW)) {
-	    throttle = 0.5;
+	    throttle = 0.25;
 	} else {
-	    throttle = 1.0;
-	}
-
-	if(oi.get(OI.Button.KID_MODE_ON))
-		OI.kidMode = true;
-	if(oi.get(OI.Button.KID_MODE_OFF))
-		OI.kidMode = false;
-	
-	
+	    throttle = 0.5;
+	}	
 	
 	switch (oi.driveState) {
 	case REVERSE:
 	    if (oi.get(OI.Button.STRAIGHT)) {
-		DRIVE.tankDrive(oi.getLeft(), oi.getLeft(), false);
+		DRIVE.tankDrive(throttle * oi.getLeft(), throttle * oi.getLeft(), false);
 	    } else {
 		DRIVE.tankDrive(throttle * oi.getRight(), throttle * oi.getLeft(), false);
 	    }
 	    break;
 	case FORWARD:
 	    if (oi.get(OI.Button.STRAIGHT)) {
-		DRIVE.tankDrive(-oi.getLeft(), -oi.getLeft(), false);
+		DRIVE.tankDrive(-throttle * oi.getLeft(), -throttle * oi.getLeft(), false);
 	    } else {
 		DRIVE.tankDrive(-throttle * oi.getLeft(), -throttle * oi.getRight(), false);
 	    }

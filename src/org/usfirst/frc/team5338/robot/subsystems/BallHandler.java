@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5338.robot.subsystems;
 
 import org.usfirst.frc.team5338.robot.OI;
-import org.usfirst.frc.team5338.robot.OI.BallState;
 import org.usfirst.frc.team5338.robot.commands.HandleBalls;
 
 import com.ctre.CANTalon;
@@ -24,23 +23,13 @@ public class BallHandler extends Subsystem {
 
     public void handleBalls(OI oi) {
 	if (oi.get(OI.Button.OUTTAKE)) {
-	    oi.ballState = BallState.OUTTAKE;
-	} else if (oi.get(OI.Button.UPPER_INTAKE)) {
-	    oi.ballState = BallState.UPPER_INTAKE;
-	} else if (oi.get(OI.Button.OFF)) {
-	    oi.ballState = BallState.OFF;
-	}
-	switch (oi.ballState) {
-	case OUTTAKE:
-	    TOP.set(0.75);
+		TOP.set(0.75);
 	    BOTTOM.set(0.75);
-	    break;
-	case UPPER_INTAKE:
-	    TOP.set(0.75);
+	} else if (oi.get(OI.Button.UPPER_INTAKE)) {
+		TOP.set(0.75);
 	    BOTTOM.set(-0.75);
-	    break;
-	default:
-	    stopBalls();
+	} else if (oi.get(OI.Button.OFF)) {
+		stopBalls();
 	}
     }
 
