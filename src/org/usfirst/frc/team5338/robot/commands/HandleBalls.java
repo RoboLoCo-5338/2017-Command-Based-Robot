@@ -14,7 +14,7 @@ public class HandleBalls extends Command {
     }
 
     protected boolean isFinished() {
-	return false; // Runs until interrupted
+	return false;
     }
 
     protected void end() {

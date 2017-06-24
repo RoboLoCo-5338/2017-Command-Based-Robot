@@ -28,9 +28,9 @@ public class BallHandler extends Subsystem {
 	} else if (oi.get(OI.Button.UPPER_INTAKE)) {
 		TOP.set(0.75);
 	    BOTTOM.set(-0.75);
-	} else if (oi.get(OI.Button.OFF)) {
+	} else {
 		stopBalls();
-	}
+    }
     }
 
     public void stopBalls() {

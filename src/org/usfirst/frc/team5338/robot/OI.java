@@ -8,7 +8,7 @@ public class OI {
 	public DriveState driveState;
 
 	public enum Button {
-		OFF, UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
+		UPPER_INTAKE, OUTTAKE, SLOW, STRAIGHT, REVERSE, FORWARD, GEAR_DEPOSIT, WINCH, GEAR_PICK_INTAKE, GEAR_PICK_OUTTAKE
 	}
 
 	public enum DriveState {
@@ -30,8 +30,6 @@ public class OI {
 
 	public boolean get(Button button) {
 		switch (button) {
-		case OFF:
-			return joyR.getRawButton(5);
 		case UPPER_INTAKE:
 			return joyR.getRawButton(6);
 		case OUTTAKE:
