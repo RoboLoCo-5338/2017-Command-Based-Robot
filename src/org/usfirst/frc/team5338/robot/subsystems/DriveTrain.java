@@ -17,7 +17,7 @@ public class DriveTrain extends Subsystem {
 
     public final RobotDrive DRIVE = new RobotDrive(DRIVEL1, DRIVEL2, DRIVER1, DRIVER2);
 
-    private double throttle = 0.5;
+    private double throttle = 0.4;
 
     public DriveTrain() {
 	super();
@@ -36,9 +36,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	if (oi.get(OI.Button.SLOW)) {
-	    throttle = 0.25;
+	    throttle = 0.2;
 	} else {
-	    throttle = 0.5;
+	    throttle = 0.4;
 	}	
 	
 	switch (oi.driveState) {

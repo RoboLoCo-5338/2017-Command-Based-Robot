@@ -46,7 +46,8 @@ public class OI {
 			return joyR.getRawButton(2);
 		case GEAR_DEPOSIT:
 			return joyL.getRawButton(5);
-		case WINCH:			return joyL.getRawButton(6);
+		case WINCH:
+			return joyL.getRawButton(6);
 		case GEAR_PICK_INTAKE:
 			return joyL.getRawButton(4);
 		case GEAR_PICK_OUTTAKE:
@@ -66,10 +67,10 @@ public class OI {
 	}
 
 	public double getLeft() {
-		return joystickDeadZone(joyL.getRawAxis(1));
+		return joystickDeadZone(joyL.getRawAxis(1)) / 2;
 	}
 
 	public double getRight() {
-		return joystickDeadZone(joyR.getRawAxis(1));
+		return joystickDeadZone(joyR.getRawAxis(1)) / 2;
 	}
 }
